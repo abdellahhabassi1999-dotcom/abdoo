@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Silya's Parfumerie - Votre destination beauté à Kénitra. Parfums authentiques, cosmétiques de qualité premium, soins de beauté.">
+    <meta name="keywords" content="parfumerie, cosmétiques, beauté, Kénitra, Maroc, parfums, maquillage, soins">
+    <meta property="og:title" content="Silya's Parfumerie - Beauté & Élégance">
+    <meta property="og:description" content="Découvrez notre collection exclusive de parfums et cosmétiques de luxe">
+    <meta property="og:image" content="assets/images/logo/logo.png">
+    <meta property="og:type" content="website">
+
+    <title>Silya's Parfumerie - Beauté & Élégance | Kénitra</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo/favicon.png">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="announcement">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span data-translate="free-delivery">Livraison gratuite pour toute commande supérieure à 500 DH</span>
+                </div>
+                <div class="top-bar-actions">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="fr">FR</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="ar">AR</button>
+                    </div>
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>Silya's</h1>
+                        <span>Parfumerie</span>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="main-nav" id="mainNav">
+                    <ul>
+                        <li><a href="#home" class="active" data-translate="nav-home">Accueil</a></li>
+                        <li><a href="#categories" data-translate="nav-categories">Catégories</a></li>
+                        <li><a href="#products" data-translate="nav-products">Produits</a></li>
+                        <li><a href="#about" data-translate="nav-about">À Propos</a></li>
+                        <li><a href="#contact" data-translate="nav-contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Search -->
+                    <button class="header-icon search-toggle" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+
+                    <!-- Wishlist -->
+                    <button class="header-icon wishlist-toggle" aria-label="Wishlist">
+                        <i class="far fa-heart"></i>
+                        <span class="badge" id="wishlistCount">0</span>
+                    </button>
+
+                    <!-- Cart -->
+                    <button class="header-icon cart-toggle" aria-label="Cart">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="badge" id="cartCount">0</span>
+                    </button>
+
+                    <!-- User Account -->
+                    <button class="header-icon user-toggle" aria-label="Account">
+                        <i class="far fa-user"></i>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar" id="searchBar">
+                <div class="search-input-wrapper">
+                    <input type="text" id="searchInput" placeholder="Rechercher des produits..." data-translate-placeholder="search-placeholder">
+                    <button class="search-submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button class="search-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider" id="home">
+        <div class="slider-container">
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <div class="slide-content">
+                    <div class="container">
+                        <div class="slide-text">
+                            <span class="slide-subtitle" data-translate="hero-slide1-subtitle">Nouvelle Collection</span>
+                            <h2 class="slide-title" data-translate="hero-slide1-title">Collection Exclusive</h2>
+                            <p class="slide-description" data-translate="hero-slide1-desc">Découvrez nos parfums d'exception</p>
+                            <a href="#products" class="btn btn-primary" data-translate="hero-cta">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-bg" style="background: linear-gradient(135deg, #C8A882 0%, #A08968 100%);"></div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="container">
+                        <div class="slide-text">
+                            <span class="slide-subtitle" data-translate="hero-slide2-subtitle">Beauté & Élégance</span>
+                            <h2 class="slide-title" data-translate="hero-slide2-title">Soins de Beauté</h2>
+                            <p class="slide-description" data-translate="hero-slide2-desc">Produits de qualité premium pour votre beauté</p>
+                            <a href="#products" class="btn btn-primary" data-translate="hero-cta">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-bg" style="background: linear-gradient(135deg, #E5D4B7 0%, #C8A882 100%);"></div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="container">
+                        <div class="slide-text">
+                            <span class="slide-subtitle" data-translate="hero-slide3-subtitle">Offre Spéciale</span>
+                            <h2 class="slide-title" data-translate="hero-slide3-title">-30% de Réduction</h2>
+                            <p class="slide-description" data-translate="hero-slide3-desc">Sur une sélection de produits</p>
+                            <a href="#products" class="btn btn-primary" data-translate="hero-cta">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-bg" style="background: linear-gradient(135deg, #A08968 0%, #8A7456 100%);"></div>
+            </div>
+
+            <!-- Slider Controls -->
+            <button class="slider-control prev" aria-label="Previous">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-control next" aria-label="Next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Slider Dots -->
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Bar -->
+    <section class="features-bar">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-certificate"></i>
+                    <div class="feature-text">
+                        <h4 data-translate="feature-authentic-title">100% Authentique</h4>
+                        <p data-translate="feature-authentic-desc">Produits originaux garantis</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-truck"></i>
+                    <div class="feature-text">
+                        <h4 data-translate="feature-delivery-title">Livraison Rapide</h4>
+                        <p data-translate="feature-delivery-desc">Partout au Maroc</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <div class="feature-text">
+                        <h4 data-translate="feature-whatsapp-title">Commande WhatsApp</h4>
+                        <p data-translate="feature-whatsapp-desc">Service client 24/7</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-star"></i>
+                    <div class="feature-text">
+                        <h4 data-translate="feature-quality-title">Qualité Premium</h4>
+                        <p data-translate="feature-quality-desc">Sélection exclusive</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-translate="categories-title">Nos Catégories</h2>
+                <p data-translate="categories-subtitle">Explorez notre sélection de produits</p>
+            </div>
+
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-translate="products-title">Nos Produits</h2>
+                <p data-translate="products-subtitle">Découvrez notre collection exclusive</p>
+            </div>
+
+            <!-- Product Filters -->
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all" data-translate="filter-all">Tous</button>
+                <button class="filter-btn" data-filter="new" data-translate="filter-new">Nouveautés</button>
+                <button class="filter-btn" data-filter="bestseller" data-translate="filter-bestseller">Meilleures Ventes</button>
+                <button class="filter-btn" data-filter="sale" data-translate="filter-sale">Promotions</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+
+            <!-- Load More Button -->
+            <div class="load-more-wrapper">
+                <button class="btn btn-secondary" id="loadMoreBtn" data-translate="load-more">Voir Plus</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Section -->
+    <section class="instagram-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-translate="instagram-title">Suivez-nous sur Instagram</h2>
+                <p>
+                    <a href="https://instagram.com/silya_parfumerie" target="_blank" class="instagram-handle">
+                        @silya_parfumerie
+                    </a>
+                </p>
+            </div>
+
+            <div class="instagram-grid" id="instagramGrid">
+                <!-- Instagram posts will be loaded here -->
+                <div class="instagram-item">
+                    <img src="assets/images/instagram/post1.jpg" alt="Instagram post" loading="lazy">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="assets/images/instagram/post2.jpg" alt="Instagram post" loading="lazy">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="assets/images/instagram/post3.jpg" alt="Instagram post" loading="lazy">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="assets/images/instagram/post4.jpg" alt="Instagram post" loading="lazy">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="assets/images/instagram/post5.jpg" alt="Instagram post" loading="lazy">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="assets/images/instagram/post6.jpg" alt="Instagram post" loading="lazy">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 data-translate="about-title">À Propos de Silya's Parfumerie</h2>
+                    <p data-translate="about-text1">
+                        Bienvenue chez Silya's Parfumerie, votre destination beauté de confiance à Kénitra.
+                        Nous sommes passionnés par l'art de la beauté et nous nous engageons à vous offrir
+                        une sélection exclusive de parfums authentiques et de cosmétiques de luxe.
+                    </p>
+                    <p data-translate="about-text2">
+                        Notre mission est de rendre accessible la beauté et l'élégance à tous, avec des
+                        produits 100% authentiques, un service client exceptionnel et une livraison rapide
+                        partout au Maroc.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="about-feature1">Produits 100% Authentiques</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="about-feature2">Service Client Premium</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="about-feature3">Livraison Garantie</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="assets/images/about/store.jpg" alt="Silya's Parfumerie Store" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Column 1: About -->
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <h3>Silya's</h3>
+                        <span>Parfumerie</span>
+                    </div>
+                    <p data-translate="footer-about">
+                        Votre destination beauté à Kénitra. Parfums authentiques et cosmétiques de luxe.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/silya_parfumerie" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/silyasparfumerie" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://wa.me/212766985350" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://tiktok.com/@silya_parfumerie" target="_blank" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Footer Column 2: Quick Links -->
+                <div class="footer-column">
+                    <h4 data-translate="footer-links-title">Liens Rapides</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" data-translate="nav-home">Accueil</a></li>
+                        <li><a href="#categories" data-translate="nav-categories">Catégories</a></li>
+                        <li><a href="#products" data-translate="nav-products">Produits</a></li>
+                        <li><a href="#about" data-translate="nav-about">À Propos</a></li>
+                        <li><a href="#contact" data-translate="nav-contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Column 3: Categories -->
+                <div class="footer-column">
+                    <h4 data-translate="footer-categories-title">Catégories</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" data-category="parfums" data-translate="cat-parfums">Parfums</a></li>
+                        <li><a href="#" data-category="skincare" data-translate="cat-skincare">Soins de la Peau</a></li>
+                        <li><a href="#" data-category="makeup" data-translate="cat-makeup">Maquillage</a></li>
+                        <li><a href="#" data-category="haircare" data-translate="cat-haircare">Soins Capillaires</a></li>
+                        <li><a href="#" data-category="gifts" data-translate="cat-gifts">Coffrets Cadeaux</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Column 4: Contact -->
+                <div class="footer-column">
+                    <h4 data-translate="footer-contact-title">Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kénitra Mall, 1er étage<br>Magasin n°82, Kénitra</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+212766985350">+212 766 985 350</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:contact@silyasparfumerie.ma">contact@silyasparfumerie.ma</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span data-translate="footer-hours">10:00 - 22:00 (Tous les jours)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 Silya's Parfumerie. <span data-translate="footer-rights">Tous droits réservés.</span></p>
+                <div class="payment-methods">
+                    <i class="fas fa-money-bill-wave" title="Cash"></i>
+                    <i class="fas fa-credit-card" title="Card"></i>
+                    <i class="fab fa-cc-visa" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 data-translate="cart-title">Panier</h3>
+            <button class="cart-close" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span data-translate="cart-total">Total:</span>
+                <span class="total-amount" id="cartTotal">0 DH</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn" data-translate="cart-checkout">
+                Commander via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3 data-translate="wishlist-title">Ma Liste de Souhaits</h3>
+            <button class="wishlist-close" aria-label="Close wishlist">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems">
+            <!-- Wishlist items will be loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Product Quick View Modal -->
+    <div class="modal" id="quickViewModal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="quick-view-content" id="quickViewContent">
+                <!-- Product details will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/translations.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

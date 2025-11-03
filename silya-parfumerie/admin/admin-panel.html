@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Silya's Parfumerie</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/admin-styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Silya's</h2>
+            <span>Admin Panel</span>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item active" data-page="dashboard">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="menu-item" data-page="products">
+                <i class="fas fa-box"></i>
+                <span>Produits</span>
+            </a>
+            <a href="#" class="menu-item" data-page="categories">
+                <i class="fas fa-tags"></i>
+                <span>Catégories</span>
+            </a>
+            <a href="#" class="menu-item" data-page="orders">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Commandes</span>
+            </a>
+            <a href="#" class="menu-item" data-page="customers">
+                <i class="fas fa-users"></i>
+                <span>Clients</span>
+            </a>
+            <a href="#" class="menu-item" data-page="settings">
+                <i class="fas fa-cog"></i>
+                <span>Paramètres</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="../index.html" class="menu-item">
+                <i class="fas fa-home"></i>
+                <span>Voir le site</span>
+            </a>
+            <a href="#" class="menu-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Déconnexion</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="top-bar-content">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Rechercher...">
+                </div>
+
+                <div class="top-bar-actions">
+                    <button class="icon-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+
+                    <div class="user-menu">
+                        <img src="../assets/images/logo/admin-avatar.png" alt="Admin" onerror="this.src='https://via.placeholder.com/40'">
+                        <div class="user-info">
+                            <span class="user-name" id="adminName">Admin</span>
+                            <span class="user-role">Administrateur</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="content-area" id="contentArea">
+            <!-- Dashboard Page -->
+            <div class="page active" id="dashboardPage">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p>Aperçu de votre boutique</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalProducts">0</h3>
+                            <p>Total Produits</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>12,450 DH</h3>
+                            <p>Ventes du mois</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>48</h3>
+                            <p>Commandes</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>127</h3>
+                            <p>Clients</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Activité Récente</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <i class="fas fa-shopping-cart text-success"></i>
+                                    <div>
+                                        <p><strong>Nouvelle commande</strong> - #1234</p>
+                                        <small>Il y a 2 heures</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <i class="fas fa-box text-info"></i>
+                                    <div>
+                                        <p><strong>Produit ajouté</strong> - Dior Sauvage</p>
+                                        <small>Il y a 5 heures</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <i class="fas fa-user text-warning"></i>
+                                    <div>
+                                        <p><strong>Nouveau client</strong> - Marie Dubois</p>
+                                        <small>Hier</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Produits Populaires</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="popular-products" id="popularProducts">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Page -->
+            <div class="page" id="productsPage">
+                <div class="page-header">
+                    <h1>Gestion des Produits</h1>
+                    <button class="btn btn-primary" id="addProductBtn">
+                        <i class="fas fa-plus"></i> Ajouter un produit
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-wrapper">
+                            <table class="data-table" id="productsTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Image</th>
+                                        <th>Nom</th>
+                                        <th>Catégorie</th>
+                                        <th>Prix</th>
+                                        <th>Stock</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productsTableBody">
+                                    <!-- Populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Page -->
+            <div class="page" id="categoriesPage">
+                <div class="page-header">
+                    <h1>Gestion des Catégories</h1>
+                    <button class="btn btn-primary" id="addCategoryBtn">
+                        <i class="fas fa-plus"></i> Ajouter une catégorie
+                    </button>
+                </div>
+
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Orders Page -->
+            <div class="page" id="ordersPage">
+                <div class="page-header">
+                    <h1>Gestion des Commandes</h1>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <p class="text-muted">Fonctionnalité en cours de développement...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customers Page -->
+            <div class="page" id="customersPage">
+                <div class="page-header">
+                    <h1>Gestion des Clients</h1>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <p class="text-muted">Fonctionnalité en cours de développement...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div class="page" id="settingsPage">
+                <div class="page-header">
+                    <h1>Paramètres</h1>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Paramètres Généraux</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="settingsForm">
+                            <div class="form-group">
+                                <label>Nom de la boutique</label>
+                                <input type="text" class="form-control" value="Silya's Parfumerie">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" value="contact@silyasparfumerie.ma">
+                            </div>
+                            <div class="form-group">
+                                <label>Téléphone</label>
+                                <input type="tel" class="form-control" value="+212 766 985 350">
+                            </div>
+                            <div class="form-group">
+                                <label>Adresse</label>
+                                <textarea class="form-control" rows="3">Kénitra Mall, 1er étage, Magasin n°82, Kénitra</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="productModalTitle">Ajouter un produit</h2>
+                <button class="modal-close" onclick="closeProductModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="productId">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productName">Nom du produit *</label>
+                            <input type="text" id="productName" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productBrand">Marque</label>
+                            <input type="text" id="productBrand" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productCategory">Catégorie *</label>
+                            <select id="productCategory" class="form-control" required>
+                                <option value="">Sélectionner...</option>
+                                <option value="parfums">Parfums</option>
+                                <option value="skincare">Soins de la Peau</option>
+                                <option value="makeup">Maquillage</option>
+                                <option value="haircare">Soins Capillaires</option>
+                                <option value="hygiene">Hygiène</option>
+                                <option value="gifts">Coffrets Cadeaux</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productBadge">Badge</label>
+                            <select id="productBadge" class="form-control">
+                                <option value="">Aucun</option>
+                                <option value="new">Nouveau</option>
+                                <option value="bestseller">Best Seller</option>
+                                <option value="sale">Promotion</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productPrice">Prix (DH) *</label>
+                            <input type="number" id="productPrice" class="form-control" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productOriginalPrice">Prix Original (DH)</label>
+                            <input type="number" id="productOriginalPrice" class="form-control" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productDescription">Description</label>
+                        <textarea id="productDescription" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productVolume">Volume</label>
+                            <input type="text" id="productVolume" class="form-control" placeholder="ex: 100ml">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productRating">Note</label>
+                            <input type="number" id="productRating" class="form-control" min="0" max="5" step="0.1" value="4.5">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productImage">URL de l'image</label>
+                        <input type="text" id="productImage" class="form-control" placeholder="products/product-name.jpg">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="productInStock" checked>
+                            En stock
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeProductModal()">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/admin-panel.js"></script>
+</body>
+</html>

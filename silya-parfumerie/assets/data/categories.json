@@ -1,0 +1,56 @@
+[
+  {
+    "id": "gifts",
+    "name": "Coffrets Cadeaux",
+    "nameEn": "Gift Sets",
+    "nameAr": "صناديق الهدايا",
+    "icon": "fa-gift",
+    "image": "categories/gifts.jpg",
+    "description": "Coffrets élégants pour toutes les occasions"
+  },
+  {
+    "id": "parfums",
+    "name": "Parfums",
+    "nameEn": "Perfumes",
+    "nameAr": "العطور",
+    "icon": "fa-spray-can",
+    "image": "categories/parfums.jpg",
+    "description": "Collection exclusive de parfums authentiques"
+  },
+  {
+    "id": "skincare",
+    "name": "Soins de la Peau",
+    "nameEn": "Skincare",
+    "nameAr": "العناية بالبشرة",
+    "icon": "fa-hand-sparkles",
+    "image": "categories/skincare.jpg",
+    "description": "Produits de soin pour une peau éclatante"
+  },
+  {
+    "id": "haircare",
+    "name": "Soins Capillaires",
+    "nameEn": "Hair Care",
+    "nameAr": "العناية بالشعر",
+    "icon": "fa-spray-can-sparkles",
+    "image": "categories/haircare.jpg",
+    "description": "Solutions professionnelles pour vos cheveux"
+  },
+  {
+    "id": "hygiene",
+    "name": "Hygiène",
+    "nameEn": "Hygiene",
+    "nameAr": "النظافة",
+    "icon": "fa-pump-soap",
+    "image": "categories/hygiene.jpg",
+    "description": "Produits d'hygiène quotidienne"
+  },
+  {
+    "id": "makeup",
+    "name": "Maquillage",
+    "nameEn": "Makeup",
+    "nameAr": "المكياج",
+    "icon": "fa-palette",
+    "image": "categories/makeup.jpg",
+    "description": "Cosmétiques de luxe pour sublimer votre beauté"
+  }
+]
