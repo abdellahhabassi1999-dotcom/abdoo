@@ -128,21 +128,45 @@ function resetSliderAutoPlay() {
 
 // ==================== Data Loading ====================
 async function loadData() {
+    showLoadingState(true);
+
     try {
-        // Load products
+        // Try to load from JSON files (works with web server)
         const productsResponse = await fetch('assets/data/products.json');
-        products = await productsResponse.json();
-
-        // Load categories
         const categoriesResponse = await fetch('assets/data/categories.json');
-        categories = await categoriesResponse.json();
 
+        if (productsResponse.ok && categoriesResponse.ok) {
+            products = await productsResponse.json();
+            categories = await categoriesResponse.json();
+            console.log('Data loaded from JSON files successfully');
+        } else {
+            throw new Error('Failed to load JSON files');
+        }
+    } catch (error) {
+        console.warn('Loading from JSON failed, using sample data:', error.message);
+        // Use sample data if files don't exist or CORS blocks access
+        loadSampleData();
+    } finally {
+        showLoadingState(false);
         renderCategories();
         renderProducts();
-    } catch (error) {
-        console.error('Error loading data:', error);
-        // Use sample data if files don't exist
-        loadSampleData();
+    }
+}
+
+// Show/hide loading state
+function showLoadingState(show) {
+    const productsGrid = document.getElementById('productsGrid');
+    const categoriesGrid = document.getElementById('categoriesGrid');
+
+    if (show) {
+        if (productsGrid) {
+            productsGrid.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
+                    <div style="display: inline-block; width: 50px; height: 50px; border: 4px solid #f3f3f3; border-top: 4px solid var(--gold-primary); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                    <p style="margin-top: 20px; color: var(--text-secondary);">Chargement des produits...</p>
+                </div>
+            `;
+        }
     }
 }
 
@@ -894,6 +918,27 @@ function attachEventListeners() {
             }
         });
     });
+
+    // Scroll to top button
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    if (scrollToTopBtn) {
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top on click
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 }
 
 function attachProductEventListeners() {

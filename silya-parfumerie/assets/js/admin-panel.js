@@ -57,22 +57,103 @@ function logout() {
 // ==================== Load Data ====================
 async function loadData() {
     try {
-        // Load products
+        // Try to load from JSON files
         const productsResponse = await fetch('../assets/data/products.json');
-        products = await productsResponse.json();
-
-        // Load categories
         const categoriesResponse = await fetch('../assets/data/categories.json');
-        categories = await categoriesResponse.json();
 
+        if (productsResponse.ok && categoriesResponse.ok) {
+            products = await productsResponse.json();
+            categories = await categoriesResponse.json();
+            console.log('✅ Admin: Data loaded from JSON successfully');
+        } else {
+            throw new Error('Failed to fetch JSON files');
+        }
+    } catch (error) {
+        console.warn('⚠️  Admin: Loading from JSON failed, loading from localStorage or using defaults');
+
+        // Try to load from localStorage (if user added products)
+        const savedProducts = localStorage.getItem('silya-products');
+        if (savedProducts) {
+            try {
+                products = JSON.parse(savedProducts);
+                console.log('✅ Loaded products from localStorage');
+            } catch (e) {
+                console.error('Failed to parse saved products');
+            }
+        }
+
+        // Load default categories
+        if (categories.length === 0) {
+            categories = [
+                { id: 'gifts', name: 'Coffrets Cadeaux', icon: 'fa-gift', description: 'Coffrets élégants' },
+                { id: 'parfums', name: 'Parfums', icon: 'fa-spray-can', description: 'Collection exclusive' },
+                { id: 'skincare', name: 'Soins de la Peau', icon: 'fa-hand-sparkles', description: 'Produits de soin' },
+                { id: 'haircare', name: 'Soins Capillaires', icon: 'fa-spray-can-sparkles', description: 'Solutions professionnelles' },
+                { id: 'hygiene', name: 'Hygiène', icon: 'fa-pump-soap', description: 'Produits d\'hygiène' },
+                { id: 'makeup', name: 'Maquillage', icon: 'fa-palette', description: 'Cosmétiques de luxe' }
+            ];
+        }
+
+        // Load default products if empty
+        if (products.length === 0) {
+            products = getDefaultProducts();
+            showNotification('Données de démonstration chargées. Ajoutez vos propres produits!', 'info');
+        }
+    } finally {
         // Render initial page
         renderDashboard();
         renderProducts();
         renderCategories();
-    } catch (error) {
-        console.error('Error loading data:', error);
-        showNotification('Erreur lors du chargement des données', 'error');
     }
+}
+
+// Default products for demo
+function getDefaultProducts() {
+    return [
+        {
+            id: 1,
+            name: 'Dior Sauvage Eau de Parfum',
+            brand: 'Dior',
+            category: 'parfums',
+            price: 1200,
+            originalPrice: 1500,
+            image: 'products/dior-sauvage.jpg',
+            rating: 4.8,
+            reviews: 245,
+            badge: 'bestseller',
+            inStock: true,
+            description: 'Un parfum masculin puissant et raffiné',
+            volume: '100ml'
+        },
+        {
+            id: 2,
+            name: 'Chanel N°5 Eau de Parfum',
+            brand: 'Chanel',
+            category: 'parfums',
+            price: 1800,
+            image: 'products/chanel-5.jpg',
+            rating: 4.9,
+            reviews: 589,
+            badge: 'bestseller',
+            inStock: true,
+            description: 'Le parfum iconique féminin',
+            volume: '100ml'
+        },
+        {
+            id: 3,
+            name: 'La Roche-Posay Effaclar Duo',
+            brand: 'La Roche-Posay',
+            category: 'skincare',
+            price: 280,
+            image: 'products/effaclar.jpg',
+            rating: 4.6,
+            reviews: 178,
+            badge: 'new',
+            inStock: true,
+            description: 'Soin anti-imperfections',
+            volume: '40ml'
+        }
+    ];
 }
 
 // ==================== UI Initialization ====================
@@ -368,21 +449,41 @@ function getProductCountByCategory(categoryId) {
 
 // ==================== Notifications ====================
 function showNotification(message, type = 'success') {
+    const colors = {
+        success: '#27ae60',
+        error: '#e74c3c',
+        warning: '#f39c12',
+        info: '#3498db'
+    };
+
+    const icons = {
+        success: '✓',
+        error: '✕',
+        warning: '⚠',
+        info: 'ℹ'
+    };
+
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
-    notification.textContent = message;
+    notification.innerHTML = `
+        <span style="font-size: 1.2em; margin-right: 10px;">${icons[type] || icons.info}</span>
+        <span>${message}</span>
+    `;
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
         padding: 15px 20px;
-        background-color: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+        background-color: ${colors[type] || colors.info};
         color: white;
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         z-index: 10000;
         animation: slideInRight 0.3s ease;
         font-weight: 500;
+        display: flex;
+        align-items: center;
+        max-width: 400px;
     `;
 
     document.body.appendChild(notification);
