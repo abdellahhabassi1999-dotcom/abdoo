@@ -1214,6 +1214,259 @@ function viewMyOrders() {
     // TODO: Redirect to customer orders page when implemented
 }
 
+// ==================== Advanced Filtering & Sorting ====================
+let advancedFilters = {
+    minPrice: 0,
+    maxPrice: 10000,
+    minRating: 0,
+    inStockOnly: false,
+    sortBy: 'default'
+};
+
+// Initialize advanced filters
+function initializeAdvancedFilters() {
+    // Filter toggle
+    const filterToggleBtn = document.getElementById('filterToggleBtn');
+    const filtersPanel = document.getElementById('filtersPanel');
+
+    if (filterToggleBtn) {
+        filterToggleBtn.addEventListener('click', () => {
+            filtersPanel.classList.toggle('active');
+            filterToggleBtn.classList.toggle('active');
+        });
+    }
+
+    // Sort select
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            advancedFilters.sortBy = e.target.value;
+            applyFilters();
+        });
+    }
+
+    // Price range sliders
+    const priceRangeMin = document.getElementById('priceRangeMin');
+    const priceRangeMax = document.getElementById('priceRangeMax');
+    const minPriceInput = document.getElementById('minPrice');
+    const maxPriceInput = document.getElementById('maxPrice');
+
+    if (priceRangeMin && priceRangeMax) {
+        priceRangeMin.addEventListener('input', (e) => {
+            const minVal = parseInt(e.target.value);
+            const maxVal = parseInt(priceRangeMax.value);
+            if (minVal < maxVal) {
+                minPriceInput.value = minVal;
+                advancedFilters.minPrice = minVal;
+            }
+        });
+
+        priceRangeMax.addEventListener('input', (e) => {
+            const maxVal = parseInt(e.target.value);
+            const minVal = parseInt(priceRangeMin.value);
+            if (maxVal > minVal) {
+                maxPriceInput.value = maxVal;
+                advancedFilters.maxPrice = maxVal;
+            }
+        });
+    }
+
+    // Price inputs
+    if (minPriceInput) {
+        minPriceInput.addEventListener('change', (e) => {
+            const val = parseInt(e.target.value) || 0;
+            priceRangeMin.value = val;
+            advancedFilters.minPrice = val;
+        });
+    }
+
+    if (maxPriceInput) {
+        maxPriceInput.addEventListener('change', (e) => {
+            const val = parseInt(e.target.value) || 10000;
+            priceRangeMax.value = val;
+            advancedFilters.maxPrice = val;
+        });
+    }
+
+    // Rating filters
+    const ratingFilters = document.querySelectorAll('input[name="ratingFilter"]');
+    ratingFilters.forEach(filter => {
+        filter.addEventListener('change', (e) => {
+            advancedFilters.minRating = parseFloat(e.target.value);
+        });
+    });
+
+    // Stock filter
+    const inStockOnly = document.getElementById('inStockOnly');
+    if (inStockOnly) {
+        inStockOnly.addEventListener('change', (e) => {
+            advancedFilters.inStockOnly = e.target.checked;
+        });
+    }
+}
+
+function applyFilters() {
+    let filteredProducts = [...products];
+
+    // Apply category filter if any
+    if (currentFilter !== 'all') {
+        if (currentFilter === 'new') {
+            filteredProducts = filteredProducts.filter(p => p.badge === 'new');
+        } else if (currentFilter === 'bestseller') {
+            filteredProducts = filteredProducts.filter(p => p.badge === 'bestseller');
+        } else if (currentFilter === 'sale') {
+            filteredProducts = filteredProducts.filter(p => p.originalPrice && p.originalPrice > p.price);
+        } else {
+            filteredProducts = filteredProducts.filter(p => p.category === currentFilter);
+        }
+    }
+
+    // Apply price filter
+    filteredProducts = filteredProducts.filter(p =>
+        p.price >= advancedFilters.minPrice && p.price <= advancedFilters.maxPrice
+    );
+
+    // Apply rating filter
+    if (advancedFilters.minRating > 0) {
+        filteredProducts = filteredProducts.filter(p =>
+            (p.rating || 0) >= advancedFilters.minRating
+        );
+    }
+
+    // Apply stock filter
+    if (advancedFilters.inStockOnly) {
+        filteredProducts = filteredProducts.filter(p =>
+            (p.stock === undefined || p.stock > 0)
+        );
+    }
+
+    // Apply sorting
+    switch (advancedFilters.sortBy) {
+        case 'price-asc':
+            filteredProducts.sort((a, b) => a.price - b.price);
+            break;
+        case 'price-desc':
+            filteredProducts.sort((a, b) => b.price - a.price);
+            break;
+        case 'name-asc':
+            filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case 'name-desc':
+            filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+        case 'rating-desc':
+            filteredProducts.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+            break;
+        default:
+            // Default order (by ID)
+            filteredProducts.sort((a, b) => a.id - b.id);
+    }
+
+    // Render filtered and sorted products
+    renderFilteredProducts(filteredProducts);
+
+    showNotification(`${filteredProducts.length} produit(s) trouvé(s)`, 'info');
+}
+
+function renderFilteredProducts(filteredProducts) {
+    const productsGrid = document.getElementById('productsGrid');
+    if (!productsGrid) return;
+
+    if (filteredProducts.length === 0) {
+        productsGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-secondary);">
+                <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+                <h3>Aucun produit trouvé</h3>
+                <p>Essayez de modifier vos filtres pour voir plus de résultats</p>
+                <button class="btn btn-primary" onclick="resetFilters()" style="margin-top: 1rem;">
+                    Réinitialiser les filtres
+                </button>
+            </div>
+        `;
+        return;
+    }
+
+    // Display products
+    const displayProducts = filteredProducts.slice(0, displayedProducts);
+
+    productsGrid.innerHTML = displayProducts.map(product => {
+        const isInCart = cart.some(item => item.id === product.id);
+        const isInWishlist = wishlist.some(item => item.id === product.id);
+        const discount = product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
+
+        return `
+            <div class="product-card" data-product-id="${product.id}">
+                <div class="product-image">
+                    <img src="assets/images/${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='assets/images/placeholder.jpg'">
+                    ${product.badge ? `<div class="product-badge badge-${product.badge}">${getBadgeText(product.badge)}</div>` : ''}
+                    ${discount > 0 ? `<div class="product-badge badge-sale">-${discount}%</div>` : ''}
+                    <div class="product-actions">
+                        <button class="product-action-btn quick-view-btn" data-product-id="${product.id}" title="Aperçu rapide">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="product-action-btn wishlist-btn ${isInWishlist ? 'active' : ''}" data-product-id="${product.id}" title="Ajouter à la liste de souhaits">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">${getCategoryName(product.category)}</div>
+                    <h3 class="product-name" onclick="window.location.href='product-details.html?id=${product.id}'" style="cursor: pointer;">${product.name}</h3>
+                    <div class="product-price">
+                        <span class="current-price">${product.price} DH</span>
+                        ${product.originalPrice ? `<span class="original-price">${product.originalPrice} DH</span>` : ''}
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">
+                            ${generateStars(product.rating)}
+                        </div>
+                        <span class="rating-count">(${product.reviews})</span>
+                    </div>
+                    <button class="add-to-cart-btn" data-product-id="${product.id}">
+                        <i class="fas fa-shopping-bag"></i> ${isInCart ? 'Déjà dans le panier' : 'Ajouter au panier'}
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    // Attach product event listeners
+    attachProductEventListeners();
+}
+
+function resetFilters() {
+    // Reset filter values
+    advancedFilters = {
+        minPrice: 0,
+        maxPrice: 10000,
+        minRating: 0,
+        inStockOnly: false,
+        sortBy: 'default'
+    };
+
+    // Reset UI
+    document.getElementById('minPrice').value = '';
+    document.getElementById('maxPrice').value = '';
+    document.getElementById('priceRangeMin').value = 0;
+    document.getElementById('priceRangeMax').value = 1000;
+    document.getElementById('sortSelect').value = 'default';
+    document.querySelector('input[name="ratingFilter"][value="0"]').checked = true;
+    document.getElementById('inStockOnly').checked = false;
+
+    // Close filters panel
+    document.getElementById('filtersPanel').classList.remove('active');
+    document.getElementById('filterToggleBtn').classList.remove('active');
+
+    // Re-render products
+    renderProducts(currentFilter);
+    showNotification('Filtres réinitialisés', 'info');
+}
+
+// Initialize advanced filters on load
+document.addEventListener('DOMContentLoaded', () => {
+    initializeAdvancedFilters();
+});
+
 // Add CSS animations
 const style = document.createElement('style');
 style.textContent = `

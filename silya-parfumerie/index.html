@@ -252,6 +252,84 @@
                 <button class="filter-btn" data-filter="sale" data-translate="filter-sale">Promotions</button>
             </div>
 
+            <!-- Advanced Filters -->
+            <div class="advanced-filters">
+                <div class="filter-group">
+                    <button class="filter-toggle-btn" id="filterToggleBtn">
+                        <i class="fas fa-filter"></i> Filtres Avancés
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                <div class="filter-group">
+                    <label><i class="fas fa-sort"></i> Trier par:</label>
+                    <select id="sortSelect" class="filter-select">
+                        <option value="default">Par défaut</option>
+                        <option value="price-asc">Prix: Croissant</option>
+                        <option value="price-desc">Prix: Décroissant</option>
+                        <option value="name-asc">Nom: A-Z</option>
+                        <option value="name-desc">Nom: Z-A</option>
+                        <option value="rating-desc">Mieux notés</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Expandable Filters Panel -->
+            <div class="filters-panel" id="filtersPanel">
+                <div class="filters-panel-content">
+                    <!-- Price Range Filter -->
+                    <div class="filter-section">
+                        <h4><i class="fas fa-tag"></i> Prix</h4>
+                        <div class="price-range-inputs">
+                            <input type="number" id="minPrice" class="price-input" placeholder="Min" min="0">
+                            <span>-</span>
+                            <input type="number" id="maxPrice" class="price-input" placeholder="Max" min="0">
+                            <span>DH</span>
+                        </div>
+                        <div class="price-range-slider">
+                            <input type="range" id="priceRangeMin" min="0" max="1000" value="0" step="10">
+                            <input type="range" id="priceRangeMax" min="0" max="1000" value="1000" step="10">
+                        </div>
+                    </div>
+
+                    <!-- Rating Filter -->
+                    <div class="filter-section">
+                        <h4><i class="fas fa-star"></i> Note minimum</h4>
+                        <div class="rating-filters">
+                            <label class="rating-filter-option">
+                                <input type="radio" name="ratingFilter" value="0" checked>
+                                <span>Toutes les notes</span>
+                            </label>
+                            <label class="rating-filter-option">
+                                <input type="radio" name="ratingFilter" value="4">
+                                <span><i class="fas fa-star"></i> 4+ et plus</span>
+                            </label>
+                            <label class="rating-filter-option">
+                                <input type="radio" name="ratingFilter" value="3">
+                                <span><i class="fas fa-star"></i> 3+ et plus</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Availability Filter -->
+                    <div class="filter-section">
+                        <h4><i class="fas fa-box"></i> Disponibilité</h4>
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="inStockOnly" checked>
+                            <span>Produits en stock uniquement</span>
+                        </label>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="btn btn-secondary" onclick="resetFilters()">
+                            <i class="fas fa-redo"></i> Réinitialiser
+                        </button>
+                        <button class="btn btn-primary" onclick="applyFilters()">
+                            <i class="fas fa-check"></i> Appliquer
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Products Grid -->
             <div class="products-grid" id="productsGrid">
                 <!-- Products will be loaded dynamically -->
