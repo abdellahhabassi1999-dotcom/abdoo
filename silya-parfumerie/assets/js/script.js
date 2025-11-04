@@ -345,7 +345,7 @@ function renderProducts(filter = 'all') {
                 </div>
                 <div class="product-info">
                     <div class="product-category">${getCategoryName(product.category)}</div>
-                    <h3 class="product-name">${product.name}</h3>
+                    <h3 class="product-name" onclick="window.location.href='product-details.html?id=${product.id}'" style="cursor: pointer;">${product.name}</h3>
                     <div class="product-price">
                         <span class="current-price">${product.price} DH</span>
                         ${product.originalPrice ? `<span class="original-price">${product.originalPrice} DH</span>` : ''}
@@ -895,7 +895,7 @@ function attachEventListeners() {
     // Checkout button
     const checkoutBtn = document.getElementById('checkoutBtn');
     if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', checkoutViaWhatsApp);
+        checkoutBtn.addEventListener('click', openCheckout);
     }
 
     // Modal close
@@ -968,6 +968,250 @@ function attachProductEventListeners() {
             showQuickView(productId);
         });
     });
+}
+
+// ==================== Checkout System ====================
+let currentCoupon = null;
+const freeShippingThreshold = 500; // Free shipping above 500 DH
+const shippingCost = 30; // 30 DH shipping cost
+
+// Available coupons
+const coupons = {
+    'SILYA10': { type: 'percentage', value: 10, minOrder: 200 },
+    'SILYA20': { type: 'percentage', value: 20, minOrder: 500 },
+    'WELCOME': { type: 'fixed', value: 50, minOrder: 300 },
+    'NEWYEAR': { type: 'percentage', value: 15, minOrder: 0 }
+};
+
+function openCheckout() {
+    if (cart.length === 0) {
+        showNotification('Votre panier est vide', 'warning');
+        return;
+    }
+
+    const checkoutModal = document.getElementById('checkoutModal');
+    const overlay = document.getElementById('overlay');
+
+    // Populate checkout summary
+    updateCheckoutSummary();
+
+    // Show modal
+    checkoutModal.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Close cart sidebar
+    document.getElementById('cartSidebar')?.classList.remove('active');
+}
+
+function closeCheckout() {
+    const checkoutModal = document.getElementById('checkoutModal');
+    const overlay = document.getElementById('overlay');
+
+    checkoutModal.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+
+    // Reset coupon
+    currentCoupon = null;
+    document.getElementById('couponCode').value = '';
+    document.getElementById('couponMessage').textContent = '';
+    document.getElementById('discountRow').style.display = 'none';
+}
+
+function updateCheckoutSummary() {
+    const summaryItems = document.getElementById('checkoutSummaryItems');
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    // Render items
+    summaryItems.innerHTML = cart.map(item => `
+        <div class="summary-item">
+            <img src="assets/images/${item.image}" alt="${item.name}" onerror="this.src='assets/images/placeholder.jpg'">
+            <div class="summary-item-details">
+                <div class="summary-item-name">${item.name}</div>
+                <div class="summary-item-price">
+                    ${item.price} DH × <span class="summary-item-quantity">${item.quantity}</span>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    // Calculate totals
+    let discount = 0;
+    if (currentCoupon) {
+        if (currentCoupon.type === 'percentage') {
+            discount = subtotal * (currentCoupon.value / 100);
+        } else {
+            discount = currentCoupon.value;
+        }
+    }
+
+    const shipping = subtotal >= freeShippingThreshold ? 0 : shippingCost;
+    const total = subtotal - discount + shipping;
+
+    // Update UI
+    document.getElementById('checkoutSubtotal').textContent = `${subtotal.toFixed(2)} DH`;
+    document.getElementById('checkoutShipping').textContent = shipping === 0 ? 'Gratuite' : `${shipping} DH`;
+    document.getElementById('checkoutTotal').textContent = `${total.toFixed(2)} DH`;
+
+    // Show/hide discount row
+    if (currentCoupon) {
+        document.getElementById('discountRow').style.display = 'flex';
+        document.getElementById('discountLabel').textContent = currentCoupon.code;
+        document.getElementById('discountAmount').textContent = `-${discount.toFixed(2)} DH`;
+    } else {
+        document.getElementById('discountRow').style.display = 'none';
+    }
+}
+
+function applyCoupon() {
+    const couponCode = document.getElementById('couponCode').value.trim().toUpperCase();
+    const couponMessage = document.getElementById('couponMessage');
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    if (!couponCode) {
+        couponMessage.textContent = 'Veuillez entrer un code promo';
+        couponMessage.className = 'coupon-message error';
+        return;
+    }
+
+    const coupon = coupons[couponCode];
+
+    if (!coupon) {
+        couponMessage.textContent = 'Code promo invalide';
+        couponMessage.className = 'coupon-message error';
+        currentCoupon = null;
+        updateCheckoutSummary();
+        return;
+    }
+
+    if (subtotal < coupon.minOrder) {
+        couponMessage.textContent = `Commande minimale de ${coupon.minOrder} DH requise`;
+        couponMessage.className = 'coupon-message error';
+        currentCoupon = null;
+        updateCheckoutSummary();
+        return;
+    }
+
+    currentCoupon = { ...coupon, code: couponCode };
+    const discountValue = coupon.type === 'percentage' ? `${coupon.value}%` : `${coupon.value} DH`;
+    couponMessage.textContent = `✓ Code promo appliqué! Réduction de ${discountValue}`;
+    couponMessage.className = 'coupon-message success';
+    updateCheckoutSummary();
+}
+
+function submitOrder() {
+    const form = document.getElementById('checkoutForm');
+
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    // Get form data
+    const orderData = {
+        id: 'ORD-' + Date.now().toString().slice(-6),
+        date: new Date().toISOString(),
+        customer: {
+            name: document.getElementById('customerName').value,
+            phone: document.getElementById('customerPhone').value,
+            email: document.getElementById('customerEmail').value || 'N/A',
+            city: document.getElementById('customerCity').value,
+            address: document.getElementById('customerAddress').value
+        },
+        products: cart.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            image: item.image
+        })),
+        paymentMethod: document.getElementById('paymentMethod').value,
+        notes: document.getElementById('orderNotes').value || '',
+        coupon: currentCoupon ? currentCoupon.code : null,
+        subtotal: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+        discount: currentCoupon ? (currentCoupon.type === 'percentage' ?
+            cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * (currentCoupon.value / 100) :
+            currentCoupon.value) : 0,
+        shipping: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) >= freeShippingThreshold ? 0 : shippingCost,
+        total: 0,
+        status: 'pending'
+    };
+
+    orderData.total = orderData.subtotal - orderData.discount + orderData.shipping;
+
+    // Save order to localStorage
+    let orders = JSON.parse(localStorage.getItem('silya-orders')) || [];
+    orders.push(orderData);
+    localStorage.setItem('silya-orders', JSON.stringify(orders));
+
+    // Add customer to customers list if new
+    let customers = JSON.parse(localStorage.getItem('silya-customers')) || [];
+    const existingCustomer = customers.find(c => c.phone === orderData.customer.phone);
+
+    if (!existingCustomer) {
+        customers.push({
+            id: 'CUST-' + Date.now().toString().slice(-6),
+            firstName: orderData.customer.name.split(' ')[0],
+            lastName: orderData.customer.name.split(' ').slice(1).join(' ') || '',
+            email: orderData.customer.email,
+            phone: orderData.customer.phone,
+            address: orderData.customer.address,
+            city: orderData.customer.city,
+            registeredDate: new Date().toISOString(),
+            totalOrders: 1,
+            totalSpent: orderData.total
+        });
+    } else {
+        existingCustomer.totalOrders++;
+        existingCustomer.totalSpent += orderData.total;
+    }
+    localStorage.setItem('silya-customers', JSON.stringify(customers));
+
+    // Show confirmation
+    showOrderConfirmation(orderData);
+
+    // Clear cart
+    cart = [];
+    localStorage.setItem('silya-cart', JSON.stringify(cart));
+    updateCartCount();
+    renderCart();
+
+    // Close checkout
+    closeCheckout();
+}
+
+function showOrderConfirmation(orderData) {
+    const confirmationModal = document.getElementById('confirmationModal');
+    const overlay = document.getElementById('overlay');
+
+    document.getElementById('confirmationOrderNumber').textContent = orderData.id;
+
+    document.getElementById('confirmationSummary').innerHTML = `
+        <p><strong>Total:</strong> ${orderData.total.toFixed(2)} DH</p>
+        <p><strong>Produits:</strong> ${orderData.products.length} article(s)</p>
+        <p><strong>Mode de paiement:</strong> ${orderData.paymentMethod === 'cod' ? 'Paiement à la livraison' : 'Virement bancaire'}</p>
+        <p><strong>Livraison à:</strong> ${orderData.customer.city}</p>
+    `;
+
+    confirmationModal.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeConfirmation() {
+    const confirmationModal = document.getElementById('confirmationModal');
+    const overlay = document.getElementById('overlay');
+
+    confirmationModal.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function viewMyOrders() {
+    closeConfirmation();
+    showNotification('Fonctionnalité en développement: Page "Mes commandes" à venir', 'info');
+    // TODO: Redirect to customer orders page when implemented
 }
 
 // Add CSS animations

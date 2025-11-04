@@ -493,6 +493,147 @@
         </div>
     </div>
 
+    <!-- Checkout Modal -->
+    <div class="modal checkout-modal" id="checkoutModal">
+        <div class="modal-content" style="max-width: 900px;">
+            <button class="modal-close" onclick="closeCheckout()" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="checkout-container">
+                <h2><i class="fas fa-shopping-cart"></i> Finaliser la commande</h2>
+
+                <div class="checkout-content">
+                    <!-- Customer Information -->
+                    <div class="checkout-section">
+                        <h3><i class="fas fa-user"></i> Informations Client</h3>
+                        <form id="checkoutForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="customerName">Nom complet *</label>
+                                    <input type="text" id="customerName" class="form-control" required placeholder="Votre nom complet">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customerPhone">Téléphone *</label>
+                                    <input type="tel" id="customerPhone" class="form-control" required placeholder="+212 6XX XXX XXX">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="customerEmail">Email</label>
+                                    <input type="email" id="customerEmail" class="form-control" placeholder="votre@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customerCity">Ville *</label>
+                                    <select id="customerCity" class="form-control" required>
+                                        <option value="">Sélectionner une ville</option>
+                                        <option value="Kénitra">Kénitra</option>
+                                        <option value="Rabat">Rabat</option>
+                                        <option value="Casablanca">Casablanca</option>
+                                        <option value="Salé">Salé</option>
+                                        <option value="Tanger">Tanger</option>
+                                        <option value="Fès">Fès</option>
+                                        <option value="Marrakech">Marrakech</option>
+                                        <option value="Agadir">Agadir</option>
+                                        <option value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="customerAddress">Adresse de livraison *</label>
+                                <textarea id="customerAddress" class="form-control" rows="2" required placeholder="Numéro, rue, quartier..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="orderNotes">Notes de commande (optionnel)</label>
+                                <textarea id="orderNotes" class="form-control" rows="2" placeholder="Instructions spéciales pour la livraison..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="paymentMethod">Mode de paiement *</label>
+                                <select id="paymentMethod" class="form-control" required>
+                                    <option value="cod">Paiement à la livraison (Cash)</option>
+                                    <option value="bank">Virement bancaire</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="couponCode">Code promo</label>
+                                <div class="coupon-input">
+                                    <input type="text" id="couponCode" class="form-control" placeholder="Entrer le code promo">
+                                    <button type="button" class="btn btn-secondary" onclick="applyCoupon()">Appliquer</button>
+                                </div>
+                                <small id="couponMessage" class="coupon-message"></small>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="checkout-section order-summary">
+                        <h3><i class="fas fa-receipt"></i> Résumé de la commande</h3>
+                        <div class="summary-items" id="checkoutSummaryItems">
+                            <!-- Will be filled dynamically -->
+                        </div>
+                        <div class="summary-totals">
+                            <div class="summary-row">
+                                <span>Sous-total</span>
+                                <span id="checkoutSubtotal">0 DH</span>
+                            </div>
+                            <div class="summary-row discount-row" id="discountRow" style="display: none;">
+                                <span>Réduction (<span id="discountLabel"></span>)</span>
+                                <span class="discount-amount" id="discountAmount">-0 DH</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Livraison</span>
+                                <span id="checkoutShipping">0 DH</span>
+                            </div>
+                            <div class="summary-row total-row">
+                                <strong>Total</strong>
+                                <strong id="checkoutTotal">0 DH</strong>
+                            </div>
+                        </div>
+                        <div class="checkout-actions">
+                            <button type="button" class="btn btn-secondary btn-block" onclick="closeCheckout()">
+                                <i class="fas fa-arrow-left"></i> Retour au panier
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="submitOrder()">
+                                <i class="fas fa-check"></i> Confirmer la commande
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal confirmation-modal" id="confirmationModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="confirmation-content">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Commande Confirmée !</h2>
+                <p>Merci pour votre commande. Votre numéro de commande est :</p>
+                <div class="order-number" id="confirmationOrderNumber"></div>
+                <div class="confirmation-details">
+                    <p><strong>Récapitulatif :</strong></p>
+                    <div id="confirmationSummary"></div>
+                </div>
+                <p class="confirmation-message">Nous vous contacterons bientôt pour confirmer votre livraison.</p>
+                <div class="confirmation-actions">
+                    <button class="btn btn-primary" onclick="closeConfirmation()">
+                        <i class="fas fa-home"></i> Retour à l'accueil
+                    </button>
+                    <button class="btn btn-secondary" onclick="viewMyOrders()">
+                        <i class="fas fa-list"></i> Mes commandes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Silya's Parfumerie - Détails du produit">
+    <title id="pageTitle">Produit - Silya's Parfumerie</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/product-details.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo/favicon.png">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="announcement">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Livraison gratuite pour toute commande supérieure à 500 DH</span>
+                </div>
+                <div class="top-bar-actions">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="fr">FR</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="ar">AR</button>
+                    </div>
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>Silya's</h1>
+                        <span>Parfumerie</span>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="main-nav" id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#categories">Catégories</a></li>
+                        <li><a href="index.html#products">Produits</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Wishlist -->
+                    <button class="header-icon wishlist-toggle" aria-label="Wishlist">
+                        <i class="far fa-heart"></i>
+                        <span class="badge" id="wishlistCount">0</span>
+                    </button>
+
+                    <!-- Cart -->
+                    <button class="header-icon cart-toggle" aria-label="Cart">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="badge" id="cartCount">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Product Details Section -->
+    <section class="product-details-section">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">Accueil</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="index.html#products">Produits</a>
+                <i class="fas fa-chevron-right"></i>
+                <span id="breadcrumbProduct">Produit</span>
+            </div>
+
+            <div class="product-details-content" id="productDetailsContent">
+                <!-- Product content will be loaded dynamically -->
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Chargement du produit...</p>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="related-products-section">
+                <h2>Produits Similaires</h2>
+                <div class="related-products-grid" id="relatedProductsGrid">
+                    <!-- Related products will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Silya's Parfumerie</h3>
+                    <p>Votre destination beauté à Kénitra. Parfums authentiques et cosmétiques de qualité premium.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens Rapides</h4>
+                    <ul>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#products">Produits</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Kénitra, Maroc</p>
+                    <p><i class="fas fa-phone"></i> +212 766 985 350</p>
+                    <p><i class="fas fa-envelope"></i> contact@silyasparfumerie.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Silya's Parfumerie. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Panier</h3>
+            <button class="cart-close" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="cartTotal">0 DH</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">
+                Finaliser la commande
+            </button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>Ma Liste de Souhaits</h3>
+            <button class="wishlist-close" aria-label="Close wishlist">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems"></div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal review-modal" id="reviewModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close" onclick="closeReviewModal()" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2><i class="fas fa-star"></i> Laisser un avis</h2>
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label>Votre note *</label>
+                    <div class="star-rating" id="starRating">
+                        <i class="far fa-star" data-rating="1"></i>
+                        <i class="far fa-star" data-rating="2"></i>
+                        <i class="far fa-star" data-rating="3"></i>
+                        <i class="far fa-star" data-rating="4"></i>
+                        <i class="far fa-star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" id="reviewRating" required>
+                </div>
+                <div class="form-group">
+                    <label for="reviewName">Votre nom *</label>
+                    <input type="text" id="reviewName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="reviewComment">Votre avis *</label>
+                    <textarea id="reviewComment" class="form-control" rows="4" required placeholder="Partagez votre expérience avec ce produit..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeReviewModal()">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Publier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/product-details.js"></script>
+</body>
+</html>
