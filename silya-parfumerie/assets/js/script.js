@@ -52,12 +52,21 @@ function updateThemeIcon(theme) {
 // ==================== Hero Slider ====================
 let currentSlide = 0;
 let sliderInterval;
+let touchStartX = 0;
+let touchEndX = 0;
 
 function initializeSlider() {
     const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
+    const paginationDots = document.querySelectorAll('.pagination-dot');
+    const sliderContainer = document.querySelector('.slider-container');
 
     if (slides.length === 0) return;
+
+    // Update total slides counter
+    const totalSlidesEl = document.querySelector('.total-slides');
+    if (totalSlidesEl) {
+        totalSlidesEl.textContent = slides.length.toString().padStart(2, '0');
+    }
 
     // Start auto-play
     startSliderAutoPlay();
@@ -80,39 +89,93 @@ function initializeSlider() {
         });
     }
 
-    // Dots navigation
-    dots.forEach((dot, index) => {
+    // Pagination dots navigation
+    paginationDots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             goToSlide(index);
             resetSliderAutoPlay();
         });
     });
+
+    // Touch gestures for mobile
+    if (sliderContainer) {
+        sliderContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+        sliderContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            changeSlide(-1);
+            resetSliderAutoPlay();
+        } else if (e.key === 'ArrowRight') {
+            changeSlide(1);
+            resetSliderAutoPlay();
+        }
+    });
+}
+
+function handleTouchStart(e) {
+    touchStartX = e.changedTouches[0].screenX;
+}
+
+function handleTouchEnd(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50; // Minimum swipe distance
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swiped left - next slide
+            changeSlide(1);
+        } else {
+            // Swiped right - previous slide
+            changeSlide(-1);
+        }
+        resetSliderAutoPlay();
+    }
 }
 
 function changeSlide(direction) {
     const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
+    const paginationDots = document.querySelectorAll('.pagination-dot');
 
     slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
+    paginationDots[currentSlide].classList.remove('active');
 
     currentSlide = (currentSlide + direction + slides.length) % slides.length;
 
     slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
+    paginationDots[currentSlide].classList.add('active');
+
+    // Update slide counter
+    const currentSlideEl = document.querySelector('.current-slide');
+    if (currentSlideEl) {
+        currentSlideEl.textContent = (currentSlide + 1).toString().padStart(2, '0');
+    }
 }
 
 function goToSlide(index) {
     const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
+    const paginationDots = document.querySelectorAll('.pagination-dot');
 
     slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
+    paginationDots[currentSlide].classList.remove('active');
 
     currentSlide = index;
 
     slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
+    paginationDots[currentSlide].classList.add('active');
+
+    // Update slide counter
+    const currentSlideEl = document.querySelector('.current-slide');
+    if (currentSlideEl) {
+        currentSlideEl.textContent = (currentSlide + 1).toString().padStart(2, '0');
+    }
 }
 
 function startSliderAutoPlay() {
