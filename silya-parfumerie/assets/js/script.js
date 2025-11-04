@@ -21,6 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWishlistCount();
 });
 
+// Hide page loader when everything is loaded
+window.addEventListener('load', () => {
+    const loader = document.getElementById('pageLoader');
+    if (loader) {
+        setTimeout(() => {
+            loader.classList.add('hidden');
+        }, 500); // Small delay for smoother experience
+    }
+});
+
 // ==================== Theme Management ====================
 function initializeTheme() {
     const savedTheme = localStorage.getItem('silya-theme') || 'light';
@@ -837,9 +847,28 @@ function attachEventListeners() {
     const mainNav = document.getElementById('mainNav');
     if (mobileMenuToggle && mainNav) {
         mobileMenuToggle.addEventListener('click', () => {
-            mobileMenuToggle.classList.toggle('active');
+            const isActive = mobileMenuToggle.classList.toggle('active');
             mainNav.classList.toggle('active');
             document.getElementById('overlay')?.classList.toggle('active');
+
+            // Lock/unlock body scroll
+            if (isActive) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Close mobile menu when clicking navigation links
+    if (mainNav) {
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuToggle?.classList.remove('active');
+                document.getElementById('overlay')?.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
     }
 
