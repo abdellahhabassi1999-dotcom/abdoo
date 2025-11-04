@@ -1168,6 +1168,9 @@ function submitOrder() {
     }
     localStorage.setItem('silya-customers', JSON.stringify(customers));
 
+    // Send order via WhatsApp
+    sendOrderViaWhatsApp(orderData);
+
     // Show confirmation
     showOrderConfirmation(orderData);
 
@@ -1179,6 +1182,80 @@ function submitOrder() {
 
     // Close checkout
     closeCheckout();
+}
+
+// Send order confirmation via WhatsApp
+function sendOrderViaWhatsApp(orderData) {
+    const storePhone = '212766985350'; // Store WhatsApp number
+    const message = formatOrderForWhatsApp(orderData);
+    const url = `https://wa.me/${storePhone}?text=${encodeURIComponent(message)}`;
+
+    // Open WhatsApp in new tab
+    window.open(url, '_blank');
+}
+
+// Format order data for WhatsApp message
+function formatOrderForWhatsApp(order) {
+    let message = '🛍️ *NOUVELLE COMMANDE - Silya\'s Parfumerie*\n';
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+
+    // Order Information
+    message += `📋 *Numéro de commande:* ${order.id}\n`;
+    message += `📅 *Date:* ${new Date(order.date).toLocaleDateString('fr-FR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    })}\n\n`;
+
+    // Customer Information
+    message += '👤 *INFORMATIONS CLIENT*\n';
+    message += `• Nom: ${order.customer.name}\n`;
+    message += `• Téléphone: ${order.customer.phone}\n`;
+    message += `• Email: ${order.customer.email}\n`;
+    message += `• Ville: ${order.customer.city}\n`;
+    message += `• Adresse: ${order.customer.address}\n\n`;
+
+    // Products
+    message += '📦 *PRODUITS COMMANDÉS*\n';
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    order.products.forEach((item, index) => {
+        message += `${index + 1}. *${item.name}*\n`;
+        message += `   • Prix unitaire: ${item.price.toFixed(2)} DH\n`;
+        message += `   • Quantité: ${item.quantity}\n`;
+        message += `   • Sous-total: ${(item.price * item.quantity).toFixed(2)} DH\n\n`;
+    });
+
+    // Order Summary
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    message += '💰 *RÉSUMÉ DE LA COMMANDE*\n';
+    message += `• Sous-total: ${order.subtotal.toFixed(2)} DH\n`;
+
+    if (order.discount > 0) {
+        message += `• Réduction${order.coupon ? ' (' + order.coupon + ')' : ''}: -${order.discount.toFixed(2)} DH\n`;
+    }
+
+    message += `• Frais de livraison: ${order.shipping === 0 ? 'GRATUIT' : order.shipping.toFixed(2) + ' DH'}\n`;
+    message += `\n🎯 *TOTAL: ${order.total.toFixed(2)} DH*\n\n`;
+
+    // Payment Method
+    const paymentText = order.paymentMethod === 'cod' ?
+        '💵 Paiement à la livraison (Cash)' :
+        '🏦 Virement bancaire';
+    message += `💳 *Mode de paiement:* ${paymentText}\n\n`;
+
+    // Notes
+    if (order.notes) {
+        message += `📝 *Notes:* ${order.notes}\n\n`;
+    }
+
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    message += '✨ Merci pour votre commande!\n';
+    message += '📞 Nous vous contacterons bientôt pour confirmer.\n';
+    message += '\n_Silya\'s Parfumerie - Beauté & Élégance_';
+
+    return message;
 }
 
 function showOrderConfirmation(orderData) {

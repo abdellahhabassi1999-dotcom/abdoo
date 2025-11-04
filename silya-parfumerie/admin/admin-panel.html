@@ -476,24 +476,102 @@
                 <!-- Data Management -->
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-header">
-                        <h3>Gestion des Données</h3>
+                        <h3>Gestion des Données - Import/Export</h3>
                     </div>
                     <div class="card-body">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                            <button class="btn btn-secondary" id="exportAllDataBtn">
-                                <i class="fas fa-download"></i> Exporter toutes les données
-                            </button>
-                            <button class="btn btn-secondary" id="importDataBtn">
-                                <i class="fas fa-upload"></i> Importer des données
-                            </button>
-                            <button class="btn btn-secondary" id="backupDataBtn">
-                                <i class="fas fa-database"></i> Sauvegarder la base
-                            </button>
-                            <button class="btn btn-danger" id="clearDataBtn">
-                                <i class="fas fa-trash"></i> Réinitialiser tout
+                        <!-- Export Section -->
+                        <div style="margin-bottom: 30px;">
+                            <h4 style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-download"></i> Exporter les données
+                            </h4>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px;">
+                                <div>
+                                    <label style="font-weight: 600; margin-bottom: 5px; display: block;">Type de données:</label>
+                                    <select id="exportDataType" class="form-control">
+                                        <option value="all">Toutes les données</option>
+                                        <option value="products">Produits uniquement</option>
+                                        <option value="orders">Commandes uniquement</option>
+                                        <option value="customers">Clients uniquement</option>
+                                        <option value="categories">Catégories uniquement</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="font-weight: 600; margin-bottom: 5px; display: block;">Format:</label>
+                                    <select id="exportFormat" class="form-control">
+                                        <option value="json">JSON (.json)</option>
+                                        <option value="excel">Excel (.xlsx)</option>
+                                        <option value="csv">CSV (.csv)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="exportData()">
+                                <i class="fas fa-download"></i> Télécharger
                             </button>
                         </div>
-                        <input type="file" id="importFileInput" accept=".json" style="display: none;">
+
+                        <hr>
+
+                        <!-- Import Section -->
+                        <div style="margin-top: 30px;">
+                            <h4 style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-upload"></i> Importer les données
+                            </h4>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px;">
+                                <div>
+                                    <label style="font-weight: 600; margin-bottom: 5px; display: block;">Type de données:</label>
+                                    <select id="importDataType" class="form-control">
+                                        <option value="products">Produits</option>
+                                        <option value="orders">Commandes</option>
+                                        <option value="customers">Clients</option>
+                                        <option value="categories">Catégories</option>
+                                        <option value="all">Toutes les données</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="font-weight: 600; margin-bottom: 5px; display: block;">Action:</label>
+                                    <select id="importAction" class="form-control">
+                                        <option value="replace">Remplacer les données existantes</option>
+                                        <option value="merge">Fusionner avec données existantes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button class="btn btn-primary" onclick="document.getElementById('importFileInput').click()">
+                                    <i class="fas fa-file-upload"></i> Choisir un fichier
+                                </button>
+                                <button class="btn btn-success" onclick="downloadTemplate()">
+                                    <i class="fas fa-file-download"></i> Télécharger modèle Excel
+                                </button>
+                            </div>
+                            <input type="file" id="importFileInput" accept=".json,.xlsx,.xls,.csv" style="display: none;" onchange="handleFileImport(event)">
+                            <div id="importPreview" style="margin-top: 15px; display: none;">
+                                <h5>Aperçu des données à importer:</h5>
+                                <div id="importPreviewContent" style="max-height: 300px; overflow-y: auto; background: #f8f9fa; padding: 15px; border-radius: 8px;"></div>
+                                <div style="margin-top: 15px; display: flex; gap: 10px;">
+                                    <button class="btn btn-success" onclick="confirmImport()">
+                                        <i class="fas fa-check"></i> Confirmer l'importation
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="cancelImport()">
+                                        <i class="fas fa-times"></i> Annuler
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr style="margin: 30px 0;">
+
+                        <!-- Quick Actions -->
+                        <div style="margin-top: 30px;">
+                            <h4 style="margin-bottom: 15px;">Actions Rapides</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                                <button class="btn btn-secondary" onclick="backupAllData()">
+                                    <i class="fas fa-database"></i> Sauvegarder tout (JSON)
+                                </button>
+                                <button class="btn btn-danger" onclick="clearAllData()">
+                                    <i class="fas fa-trash"></i> Réinitialiser tout
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -766,7 +844,10 @@
     <div class="overlay" id="overlay"></div>
 
     <!-- Scripts -->
+    <!-- SheetJS for Excel import/export -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <script src="../assets/js/admin-panel.js"></script>
     <script src="../assets/js/admin-enhanced.js"></script>
+    <script src="../assets/js/import-export.js"></script>
 </body>
 </html>
