@@ -645,6 +645,20 @@ function updateWishlistCount() {
     }
 }
 
+function viewWishlist() {
+    const wishlistSidebar = document.getElementById('wishlistSidebar');
+    const overlay = document.getElementById('overlay');
+    const userDropdown = document.getElementById('userDropdown');
+
+    if (wishlistSidebar && overlay) {
+        userDropdown?.classList.remove('active');
+        wishlistSidebar.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        renderWishlistItems();
+    }
+}
+
 function renderWishlistItems() {
     const wishlistItems = document.getElementById('wishlistItems');
     if (!wishlistItems) return;
@@ -948,13 +962,39 @@ function attachEventListeners() {
         });
     }
 
-    // User account toggle - redirect to my orders page
+    // User account dropdown toggle
     const userToggle = document.querySelector('.user-toggle');
-    if (userToggle) {
-        userToggle.addEventListener('click', () => {
-            window.location.href = 'my-orders.html';
+    const userDropdown = document.getElementById('userDropdown');
+
+    if (userToggle && userDropdown) {
+        userToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!userToggle.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.remove('active');
+            }
         });
     }
+
+    // Header scroll effect
+    const mainHeader = document.querySelector('.main-header');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 50) {
+            mainHeader?.classList.add('scrolled');
+        } else {
+            mainHeader?.classList.remove('scrolled');
+        }
+
+        lastScroll = currentScroll;
+    }, { passive: true });
 
     // Overlay click
     const overlay = document.getElementById('overlay');
@@ -964,6 +1004,7 @@ function attachEventListeners() {
             wishlistSidebar?.classList.remove('active');
             mainNav?.classList.remove('active');
             mobileMenuToggle?.classList.remove('active');
+            userDropdown?.classList.remove('active');
             overlay.classList.remove('active');
             closeModal();
             document.body.style.overflow = '';

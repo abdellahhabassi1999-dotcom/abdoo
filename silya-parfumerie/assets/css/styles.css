@@ -31,6 +31,7 @@
 
     /* Current Theme Colors (Default: Light) */
     --bg-primary: var(--light-bg);
+    --bg-primary-rgb: 255, 255, 255;
     --bg-secondary: var(--light-surface);
     --text-primary: var(--light-text);
     --text-secondary: var(--light-text-secondary);
@@ -69,6 +70,7 @@
 /* Dark Mode Theme */
 [data-theme="dark"] {
     --bg-primary: var(--dark-bg);
+    --bg-primary-rgb: 26, 26, 26;
     --bg-secondary: var(--dark-surface);
     --text-primary: var(--dark-text);
     --text-secondary: var(--dark-text-secondary);
@@ -283,7 +285,22 @@ button:focus-visible {
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: background-color var(--transition-normal);
+    transition: all var(--transition-normal);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Scrolled header state */
+.main-header.scrolled {
+    background-color: rgba(var(--bg-primary-rgb), 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+[data-theme="dark"] .main-header.scrolled {
+    background-color: rgba(var(--bg-primary-rgb), 0.98);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .header-content {
@@ -379,6 +396,103 @@ button:focus-visible {
     text-align: center;
 }
 
+/* User Account Dropdown */
+.user-account-wrapper {
+    position: relative;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    width: 250px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-normal);
+    z-index: 2001;
+}
+
+.user-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--border-color);
+}
+
+.user-dropdown::after {
+    content: '';
+    position: absolute;
+    top: -7px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--bg-primary);
+}
+
+.user-dropdown-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.user-dropdown-header i {
+    font-size: 1.5rem;
+    color: var(--gold-primary);
+}
+
+.user-dropdown-menu {
+    list-style: none;
+    padding: var(--spacing-xs);
+}
+
+.user-dropdown-menu li {
+    margin: 0;
+}
+
+.user-dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    transition: all var(--transition-fast);
+}
+
+.user-dropdown-menu a:hover {
+    background: var(--bg-secondary);
+    color: var(--gold-primary);
+    transform: translateX(5px);
+}
+
+.user-dropdown-menu a i {
+    width: 20px;
+    text-align: center;
+    color: var(--gold-primary);
+}
+
 .mobile-menu-toggle {
     display: none;
     flex-direction: column;
@@ -391,6 +505,19 @@ button:focus-visible {
     height: 2px;
     background-color: var(--text-primary);
     transition: all var(--transition-fast);
+}
+
+/* Hamburger animation */
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
 }
 
 /* Search Bar */
@@ -1318,20 +1445,28 @@ button:focus-visible {
 .wishlist-sidebar {
     position: fixed;
     top: 0;
-    right: -400px;
+    right: -420px;
     width: 400px;
     height: 100vh;
     background-color: var(--bg-primary);
-    box-shadow: var(--shadow-xl);
+    box-shadow: -4px 0 30px rgba(0, 0, 0, 0.2);
     z-index: 2000;
-    transition: right var(--transition-normal);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .cart-sidebar.active,
 .wishlist-sidebar.active {
     right: 0;
+    box-shadow: -4px 0 40px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .cart-sidebar.active,
+[data-theme="dark"] .wishlist-sidebar.active {
+    box-shadow: -4px 0 40px rgba(0, 0, 0, 0.6);
 }
 
 .cart-header,
@@ -1529,15 +1664,21 @@ button:focus-visible {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     z-index: 1500;
     opacity: 0;
     visibility: hidden;
-    transition: all var(--transition-normal);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .overlay.active {
     opacity: 1;
     visibility: visible;
+}
+
+[data-theme="dark"] .overlay {
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* ==================== Animations ==================== */
