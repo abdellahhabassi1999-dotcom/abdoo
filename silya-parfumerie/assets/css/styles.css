@@ -369,6 +369,7 @@ button:focus-visible {
     position: relative;
     padding: 0.5rem 0;
     color: var(--text-primary);
+    transition: all 0.3s ease;
 }
 
 .main-nav a::after {
@@ -379,11 +380,12 @@ button:focus-visible {
     width: 0;
     height: 2px;
     background-color: var(--gold-primary);
-    transition: width var(--transition-normal);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .main-nav a:hover {
     color: var(--gold-primary);
+    transform: translateY(-2px);
 }
 
 .main-nav a:hover::after,
@@ -397,12 +399,35 @@ button:focus-visible {
 
 .main-nav a:active {
     color: var(--gold-dark);
+    transform: translateY(0);
 }
 
 .main-nav a:focus-visible {
     outline: 2px solid var(--gold-primary);
     outline-offset: 4px;
     border-radius: 4px;
+}
+
+/* Desktop navigation enhancements */
+@media (min-width: 1200px) {
+    .main-nav ul {
+        gap: clamp(1.5rem, 2.5vw, 2.5rem);
+    }
+
+    .main-nav a {
+        font-size: clamp(0.9rem, 0.95vw, 1rem);
+        padding: 0.6rem 0;
+    }
+}
+
+@media (min-width: 1400px) {
+    .main-nav ul {
+        gap: 2.5rem;
+    }
+
+    .main-nav a {
+        font-size: 1rem;
+    }
 }
 
 /* Header Actions */
