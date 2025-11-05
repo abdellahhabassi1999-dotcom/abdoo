@@ -25,10 +25,13 @@
         width: 300px;
         height: 100vh;
         background-color: var(--bg-primary);
-        box-shadow: var(--shadow-xl);
-        transition: right var(--transition-normal);
+        box-shadow: -4px 0 30px rgba(0, 0, 0, 0.3);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 2500;
         padding: var(--spacing-xl) 0;
+        overflow-y: auto;
+        isolation: isolate;
+        pointer-events: auto;
     }
 
     .main-nav.active {
@@ -38,6 +41,7 @@
     .main-nav ul {
         flex-direction: column;
         gap: 0;
+        pointer-events: auto;
     }
 
     .main-nav li {
@@ -47,14 +51,26 @@
     .main-nav a {
         display: block;
         padding: var(--spacing-md) var(--spacing-lg);
+        pointer-events: auto;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
     }
 
     .main-nav a::after {
         display: none;
     }
 
+    /* Ensure proper background for menu in dark mode */
+    [data-theme="dark"] .main-nav {
+        background-color: var(--dark-bg);
+        box-shadow: -4px 0 40px rgba(0, 0, 0, 0.6);
+    }
+
     .mobile-menu-toggle {
         display: flex;
+        z-index: 3000;
+        position: relative;
     }
 
     .mobile-menu-toggle.active span:nth-child(1) {

@@ -1602,14 +1602,15 @@ button:focus-visible {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    isolation: isolate;
+    pointer-events: none;
 }
 
 .cart-sidebar.active,
 .wishlist-sidebar.active {
     right: 0;
     box-shadow: -4px 0 40px rgba(0, 0, 0, 0.3);
+    pointer-events: auto;
 }
 
 [data-theme="dark"] .cart-sidebar.active,
@@ -1818,15 +1819,30 @@ button:focus-visible {
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
 }
 
 .overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 [data-theme="dark"] .overlay {
     background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Remove backdrop blur on mobile to prevent menu blurring */
+@media (max-width: 991px) {
+    .overlay {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    [data-theme="dark"] .overlay {
+        background-color: rgba(0, 0, 0, 0.75);
+    }
 }
 
 /* ==================== Animations ==================== */
