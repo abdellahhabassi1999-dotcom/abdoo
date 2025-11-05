@@ -57,16 +57,23 @@ function logout() {
 // ==================== Load Data ====================
 async function loadData() {
     try {
-        // Try to load from JSON files
-        const productsResponse = await fetch('../assets/data/products.json');
-        const categoriesResponse = await fetch('../assets/data/categories.json');
-
-        if (productsResponse.ok && categoriesResponse.ok) {
-            products = await productsResponse.json();
-            categories = await categoriesResponse.json();
-            console.log('✅ Admin: Data loaded from JSON successfully');
+        // Try embedded data first (works with file:// protocol)
+        if (typeof PRODUCTS_DATA !== 'undefined' && typeof CATEGORIES_DATA !== 'undefined') {
+            products = PRODUCTS_DATA;
+            categories = CATEGORIES_DATA;
+            console.log('✅ Admin: Data loaded from embedded data.js (' + products.length + ' products)');
         } else {
-            throw new Error('Failed to fetch JSON files');
+            // Fallback: Try to load from JSON files (works with web server)
+            const productsResponse = await fetch('../assets/data/products.json');
+            const categoriesResponse = await fetch('../assets/data/categories.json');
+
+            if (productsResponse.ok && categoriesResponse.ok) {
+                products = await productsResponse.json();
+                categories = await categoriesResponse.json();
+                console.log('✅ Admin: Data loaded from JSON successfully');
+            } else {
+                throw new Error('Failed to fetch JSON files');
+            }
         }
     } catch (error) {
         console.warn('⚠️  Admin: Loading from JSON failed, loading from localStorage or using defaults');
