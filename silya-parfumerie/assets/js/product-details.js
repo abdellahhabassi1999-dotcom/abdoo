@@ -28,12 +28,18 @@ async function loadProductDetails() {
         let products = JSON.parse(localStorage.getItem('silya-products'));
 
         if (!products || products.length === 0) {
-            // Load from JSON or use default products
-            const response = await fetch('assets/data/products.json');
-            if (response.ok) {
-                products = await response.json();
+            // Try embedded data first (works with file:// protocol)
+            if (typeof PRODUCTS_DATA !== 'undefined') {
+                products = PRODUCTS_DATA;
+                console.log('Product details loaded from embedded data.js');
             } else {
-                products = getDefaultProductsForDetails();
+                // Fallback: Load from JSON (works with web server)
+                const response = await fetch('assets/data/products.json');
+                if (response.ok) {
+                    products = await response.json();
+                } else {
+                    products = getDefaultProductsForDetails();
+                }
             }
         }
 
@@ -456,7 +462,8 @@ function loadRelatedProducts() {
     if (!currentProduct) return;
 
     const relatedGrid = document.getElementById('relatedProductsGrid');
-    let allProducts = JSON.parse(localStorage.getItem('silya-products')) || getDefaultProductsForDetails();
+    let allProducts = JSON.parse(localStorage.getItem('silya-products')) ||
+                      (typeof PRODUCTS_DATA !== 'undefined' ? PRODUCTS_DATA : getDefaultProductsForDetails());
 
     // Filter products from same category, excluding current product
     let relatedProducts = allProducts
