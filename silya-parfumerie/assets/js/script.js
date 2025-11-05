@@ -204,21 +204,28 @@ async function loadData() {
     showLoadingState(true);
 
     try {
-        // Try to load from JSON files (works with web server)
-        const productsResponse = await fetch('assets/data/products.json');
-        const categoriesResponse = await fetch('assets/data/categories.json');
-
-        if (productsResponse.ok && categoriesResponse.ok) {
-            products = await productsResponse.json();
-            categories = await categoriesResponse.json();
-            console.log('Data loaded from JSON files successfully');
+        // Try to use embedded data first (works with file:// protocol)
+        if (typeof PRODUCTS_DATA !== 'undefined' && typeof CATEGORIES_DATA !== 'undefined') {
+            products = PRODUCTS_DATA;
+            categories = CATEGORIES_DATA;
+            console.log('Data loaded from embedded data.js (' + products.length + ' products)');
         } else {
-            throw new Error('Failed to load JSON files');
+            // Fallback: Try to load from JSON files (works with web server)
+            const productsResponse = await fetch('assets/data/products.json');
+            const categoriesResponse = await fetch('assets/data/categories.json');
+
+            if (productsResponse.ok && categoriesResponse.ok) {
+                products = await productsResponse.json();
+                categories = await categoriesResponse.json();
+                console.log('Data loaded from JSON files successfully');
+            } else {
+                throw new Error('Failed to load data from any source');
+            }
         }
     } catch (error) {
-        console.warn('Loading from JSON failed, using sample data:', error.message);
-        // Use sample data if files don't exist or CORS blocks access
-        loadSampleData();
+        console.error('Error loading data:', error.message);
+        // Last resort: Use minimal sample data
+        loadMinimalSampleData();
     } finally {
         showLoadingState(false);
         renderCategories();
@@ -243,8 +250,8 @@ function showLoadingState(show) {
     }
 }
 
-function loadSampleData() {
-    // Sample categories
+function loadMinimalSampleData() {
+    // Minimal fallback data (only if embedded data and JSON both fail)
     categories = [
         { id: 'gifts', name: 'Coffrets Cadeaux', nameEn: 'Gift Sets', nameAr: 'صناديق الهدايا', icon: 'fa-gift', image: 'categories/gifts.jpg' },
         { id: 'parfums', name: 'Parfums', nameEn: 'Perfumes', nameAr: 'العطور', icon: 'fa-spray-can', image: 'categories/parfums.jpg' },
