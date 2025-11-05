@@ -948,6 +948,14 @@ function attachEventListeners() {
         });
     }
 
+    // User account toggle - redirect to my orders page
+    const userToggle = document.querySelector('.user-toggle');
+    if (userToggle) {
+        userToggle.addEventListener('click', () => {
+            window.location.href = 'my-orders.html';
+        });
+    }
+
     // Overlay click
     const overlay = document.getElementById('overlay');
     if (overlay) {
@@ -1232,6 +1240,11 @@ function submitOrder() {
 
     orderData.total = orderData.subtotal - orderData.discount + orderData.shipping;
 
+    // Add order number and aliases for compatibility with my-orders page
+    orderData.orderNumber = orderData.id;
+    orderData.customerInfo = orderData.customer;
+    orderData.items = orderData.products;
+
     // Save order to localStorage
     let orders = JSON.parse(localStorage.getItem('silya-orders')) || [];
     orders.push(orderData);
@@ -1379,8 +1392,8 @@ function closeConfirmation() {
 
 function viewMyOrders() {
     closeConfirmation();
-    showNotification('Fonctionnalité en développement: Page "Mes commandes" à venir', 'info');
-    // TODO: Redirect to customer orders page when implemented
+    // Redirect to customer orders page
+    window.location.href = 'my-orders.html';
 }
 
 // ==================== Advanced Filtering & Sorting ====================

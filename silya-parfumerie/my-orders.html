@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mes Commandes - Silya's Parfumerie">
+    <title>Mes Commandes | Silya's Parfumerie</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo/favicon.png">
+
+    <style>
+        .orders-container {
+            min-height: 60vh;
+            padding: 80px 0 60px;
+        }
+
+        .orders-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .orders-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .orders-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .orders-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .orders-search {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .orders-search input {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .orders-search input:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+        }
+
+        .orders-search button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gold-primary);
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .orders-filter-select {
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .orders-filter-select:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+        }
+
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .order-card {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .order-card:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 4px 15px rgba(200, 168, 130, 0.15);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .order-info {
+            flex: 1;
+        }
+
+        .order-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .order-date {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .order-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .status-pending {
+            background: #FFF3CD;
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: #D1ECF1;
+            color: #0C5460;
+        }
+
+        .status-processing {
+            background: #E2E3E5;
+            color: #383D41;
+        }
+
+        .status-shipped {
+            background: #CCE5FF;
+            color: #004085;
+        }
+
+        .status-delivered {
+            background: #D4EDDA;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #F8D7DA;
+            color: #721C24;
+        }
+
+        .order-items {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            margin-top: 15px;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .order-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .order-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+        }
+
+        .order-item-details {
+            flex: 1;
+        }
+
+        .order-item-name {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+        }
+
+        .order-item-quantity {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .order-item-price {
+            font-weight: 600;
+            color: var(--gold-primary);
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .order-total {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .order-total span {
+            color: var(--gold-primary);
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .order-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-details {
+            background: var(--gold-primary);
+            color: white;
+        }
+
+        .btn-details:hover {
+            background: var(--gold-dark);
+        }
+
+        .btn-reorder {
+            background: transparent;
+            border: 2px solid var(--gold-primary);
+            color: var(--gold-primary);
+        }
+
+        .btn-reorder:hover {
+            background: var(--gold-primary);
+            color: white;
+        }
+
+        .empty-orders {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-orders i {
+            font-size: 5rem;
+            color: var(--gold-light);
+            margin-bottom: 20px;
+        }
+
+        .empty-orders h3 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .empty-orders p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .order-customer-info {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .order-customer-info h4 {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .customer-detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .customer-detail i {
+            color: var(--gold-primary);
+            width: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .orders-header h1 {
+                font-size: 2rem;
+            }
+
+            .orders-filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .order-header {
+                flex-direction: column;
+            }
+
+            .order-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .order-actions {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .order-actions button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="announcement">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span data-translate="free-delivery">Livraison gratuite pour toute commande supérieure à 500 DH</span>
+                </div>
+                <div class="top-bar-actions">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="fr">FR</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="ar">AR</button>
+                    </div>
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>Silya's</h1>
+                        <span>Parfumerie</span>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="main-nav" id="mainNav">
+                    <ul>
+                        <li><a href="index.html#home">Accueil</a></li>
+                        <li><a href="index.html#categories">Catégories</a></li>
+                        <li><a href="index.html#products">Produits</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="my-orders.html" class="active">Mes Commandes</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Search -->
+                    <button class="header-icon search-toggle" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+
+                    <!-- Wishlist -->
+                    <button class="header-icon wishlist-toggle" aria-label="Wishlist">
+                        <i class="far fa-heart"></i>
+                        <span class="badge" id="wishlistCount">0</span>
+                    </button>
+
+                    <!-- Cart -->
+                    <button class="header-icon cart-toggle" aria-label="Cart">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="badge" id="cartCount">0</span>
+                    </button>
+
+                    <!-- User Account -->
+                    <button class="header-icon user-toggle" aria-label="Account">
+                        <i class="far fa-user"></i>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar" id="searchBar">
+                <div class="search-input-wrapper">
+                    <input type="text" id="searchInput" placeholder="Rechercher des produits...">
+                    <button class="search-submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button class="search-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Orders Container -->
+    <section class="orders-container">
+        <div class="container">
+            <div class="orders-header">
+                <h1><i class="fas fa-box"></i> Mes Commandes</h1>
+                <p>Suivez l'état de vos commandes et consultez votre historique</p>
+            </div>
+
+            <div class="orders-filters">
+                <div class="orders-search">
+                    <input type="text" id="orderSearch" placeholder="Rechercher par numéro de commande...">
+                    <button onclick="searchOrders()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <select class="orders-filter-select" id="statusFilter" onchange="filterOrders()">
+                    <option value="all">Tous les statuts</option>
+                    <option value="pending">En attente</option>
+                    <option value="confirmed">Confirmée</option>
+                    <option value="processing">En préparation</option>
+                    <option value="shipped">Expédiée</option>
+                    <option value="delivered">Livrée</option>
+                    <option value="cancelled">Annulée</option>
+                </select>
+            </div>
+
+            <div class="orders-list" id="ordersList">
+                <!-- Orders will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Column 1: About -->
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <h3>Silya's</h3>
+                        <span>Parfumerie</span>
+                    </div>
+                    <p>Votre destination beauté à Kénitra. Parfums authentiques et cosmétiques de luxe.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/silya_parfumerie" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/silyasparfumerie" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://wa.me/212766985350" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://tiktok.com/@silya_parfumerie" target="_blank" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Footer Column 2: Quick Links -->
+                <div class="footer-column">
+                    <h4>Liens Rapides</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#home">Accueil</a></li>
+                        <li><a href="index.html#categories">Catégories</a></li>
+                        <li><a href="index.html#products">Produits</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Column 3: Categories -->
+                <div class="footer-column">
+                    <h4>Catégories</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#products">Parfums</a></li>
+                        <li><a href="index.html#products">Soins de la Peau</a></li>
+                        <li><a href="index.html#products">Maquillage</a></li>
+                        <li><a href="index.html#products">Soins Capillaires</a></li>
+                        <li><a href="index.html#products">Coffrets Cadeaux</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Column 4: Contact -->
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kénitra Mall, 1er étage<br>Magasin n°82, Kénitra</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+212766985350">+212 766 985 350</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:contact@silyasparfumerie.ma">contact@silyasparfumerie.ma</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>10:00 - 22:00 (Tous les jours)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 Silya's Parfumerie. Tous droits réservés.</p>
+                <div class="payment-methods">
+                    <i class="fas fa-money-bill-wave" title="Cash"></i>
+                    <i class="fas fa-credit-card" title="Card"></i>
+                    <i class="fab fa-cc-visa" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar (from main site) -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Panier</h3>
+            <button class="cart-close" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="cartTotal">0 DH</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Commander via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar (from main site) -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>Ma Liste de Souhaits</h3>
+            <button class="wishlist-close" aria-label="Close wishlist">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems"></div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="assets/js/translations.js"></script>
+    <script src="assets/js/my-orders.js"></script>
+</body>
+</html>
