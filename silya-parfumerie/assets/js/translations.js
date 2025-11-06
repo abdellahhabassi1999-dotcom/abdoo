@@ -393,11 +393,31 @@ class TranslationManager {
     }
 
     translate(key) {
-        return translations[this.currentLang][key] || key;
+        try {
+            if (this.currentLang && translations[this.currentLang]) {
+                return translations[this.currentLang][key] || key;
+            }
+            return key;
+        } catch (error) {
+            console.warn('Translation error:', error);
+            return key;
+        }
     }
 
     getCurrentLanguage() {
         return this.currentLang;
+    }
+}
+
+// Helper function for safe translation (can be used before translationManager is initialized)
+function safeTranslate(key, fallback) {
+    try {
+        if (typeof translationManager !== 'undefined' && translationManager) {
+            return translationManager.translate(key);
+        }
+        return fallback || key;
+    } catch (error) {
+        return fallback || key;
     }
 }
 

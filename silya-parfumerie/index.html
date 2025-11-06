@@ -59,20 +59,20 @@
     </div>
 
     <!-- Main Header -->
-    <header class="main-header">
+    <header class="main-header" id="mainHeader">
         <div class="container">
             <div class="header-content">
                 <!-- Logo -->
                 <div class="logo">
-                    <a href="index.html">
+                    <a href="index.html" aria-label="Silya's Parfumerie Home">
                         <h1>Silya's</h1>
                         <span>Parfumerie</span>
                     </a>
                 </div>
 
-                <!-- Navigation -->
-                <nav class="main-nav" id="mainNav">
-                    <ul>
+                <!-- Desktop Navigation -->
+                <nav class="main-nav" id="mainNav" aria-label="Main Navigation">
+                    <ul role="list">
                         <li><a href="#home" class="active" data-translate="nav-home">Accueil</a></li>
                         <li><a href="#categories" data-translate="nav-categories">Catégories</a></li>
                         <li><a href="#products" data-translate="nav-products">Produits</a></li>
@@ -83,49 +83,49 @@
 
                 <!-- Header Actions -->
                 <div class="header-actions">
-                    <!-- Search -->
-                    <button class="header-icon search-toggle" aria-label="Search">
-                        <i class="fas fa-search"></i>
+                    <!-- Search Toggle -->
+                    <button class="header-icon search-toggle" aria-label="Rechercher des produits" title="Rechercher">
+                        <i class="fas fa-search" aria-hidden="true"></i>
                     </button>
 
-                    <!-- Wishlist -->
-                    <button class="header-icon wishlist-toggle" aria-label="Wishlist">
-                        <i class="far fa-heart"></i>
-                        <span class="badge" id="wishlistCount">0</span>
+                    <!-- Wishlist Toggle -->
+                    <button class="header-icon wishlist-toggle" aria-label="Liste de souhaits" title="Liste de souhaits">
+                        <i class="far fa-heart" aria-hidden="true"></i>
+                        <span class="badge" id="wishlistCount" aria-label="Articles dans la liste de souhaits">0</span>
                     </button>
 
-                    <!-- Cart -->
-                    <button class="header-icon cart-toggle" aria-label="Cart">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="badge" id="cartCount">0</span>
+                    <!-- Cart Toggle -->
+                    <button class="header-icon cart-toggle" aria-label="Panier" title="Panier">
+                        <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+                        <span class="badge" id="cartCount" aria-label="Articles dans le panier">0</span>
                     </button>
 
-                    <!-- User Account -->
+                    <!-- User Account Dropdown -->
                     <div class="user-account-wrapper">
-                        <button class="header-icon user-toggle" aria-label="Account">
-                            <i class="far fa-user"></i>
+                        <button class="header-icon user-toggle" aria-label="Mon compte" title="Mon compte" aria-expanded="false" aria-controls="userDropdown">
+                            <i class="far fa-user" aria-hidden="true"></i>
                         </button>
-                        <div class="user-dropdown" id="userDropdown">
+                        <div class="user-dropdown" id="userDropdown" role="menu" aria-hidden="true">
                             <div class="user-dropdown-header">
-                                <i class="fas fa-user-circle"></i>
+                                <i class="fas fa-user-circle" aria-hidden="true"></i>
                                 <span>Mon Compte</span>
                             </div>
-                            <ul class="user-dropdown-menu">
-                                <li>
+                            <ul class="user-dropdown-menu" role="none">
+                                <li role="menuitem">
                                     <a href="my-orders.html">
-                                        <i class="fas fa-box"></i>
+                                        <i class="fas fa-box" aria-hidden="true"></i>
                                         <span>Mes Commandes</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li role="menuitem">
                                     <a href="#" onclick="viewWishlist(); return false;">
-                                        <i class="fas fa-heart"></i>
+                                        <i class="fas fa-heart" aria-hidden="true"></i>
                                         <span>Ma Liste de Souhaits</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li role="menuitem">
                                     <a href="admin/login.html">
-                                        <i class="fas fa-user-shield"></i>
+                                        <i class="fas fa-user-shield" aria-hidden="true"></i>
                                         <span>Admin Panel</span>
                                     </a>
                                 </li>
@@ -134,24 +134,24 @@
                     </div>
 
                     <!-- Mobile Menu Toggle -->
-                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
                     </button>
                 </div>
             </div>
 
             <!-- Search Bar -->
-            <div class="search-bar" id="searchBar">
+            <div class="search-bar" id="searchBar" role="search" aria-label="Recherche de produits">
                 <div class="search-input-wrapper">
-                    <input type="text" id="searchInput" placeholder="Rechercher des produits..." data-translate-placeholder="search-placeholder">
-                    <button class="search-submit">
-                        <i class="fas fa-search"></i>
+                    <input type="search" id="searchInput" placeholder="Rechercher des produits..." data-translate-placeholder="search-placeholder" aria-label="Rechercher des produits" autocomplete="off">
+                    <button class="search-submit" aria-label="Lancer la recherche">
+                        <i class="fas fa-search" aria-hidden="true"></i>
                     </button>
                 </div>
-                <button class="search-close">
-                    <i class="fas fa-times"></i>
+                <button class="search-close" aria-label="Fermer la recherche">
+                    <i class="fas fa-times" aria-hidden="true"></i>
                 </button>
             </div>
         </div>

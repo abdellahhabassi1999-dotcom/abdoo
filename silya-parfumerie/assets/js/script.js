@@ -523,7 +523,7 @@ function addToCart(productId) {
     saveCart();
     updateCartCount();
     renderCartItems();
-    showNotification(translationManager?.translate('added-to-cart') || 'Produit ajouté au panier');
+    showNotification(safeTranslate('added-to-cart', 'Produit ajouté au panier'));
     renderProducts(currentFilter);
 }
 
@@ -532,7 +532,7 @@ function removeFromCart(productId) {
     saveCart();
     updateCartCount();
     renderCartItems();
-    showNotification(translationManager?.translate('removed-from-cart') || 'Produit retiré du panier');
+    showNotification(safeTranslate('removed-from-cart', 'Produit retiré du panier'));
     renderProducts(currentFilter);
 }
 
@@ -572,7 +572,7 @@ function renderCartItems() {
         cartItems.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-shopping-bag"></i>
-                <p>${translationManager?.translate('cart-empty') || 'Votre panier est vide'}</p>
+                <p>${safeTranslate('cart-empty', 'Votre panier est vide')}</p>
             </div>
         `;
         if (cartTotal) cartTotal.textContent = '0 DH';
@@ -628,7 +628,7 @@ function addToWishlist(productId) {
     saveWishlist();
     updateWishlistCount();
     renderWishlistItems();
-    showNotification(translationManager?.translate('added-to-wishlist') || 'Produit ajouté à la liste de souhaits');
+    showNotification(safeTranslate('added-to-wishlist', 'Produit ajouté à la liste de souhaits'));
     renderProducts(currentFilter);
 }
 
@@ -637,7 +637,7 @@ function removeFromWishlist(productId) {
     saveWishlist();
     updateWishlistCount();
     renderWishlistItems();
-    showNotification(translationManager?.translate('removed-from-wishlist') || 'Produit retiré de la liste de souhaits');
+    showNotification(safeTranslate('removed-from-wishlist', 'Produit retiré de la liste de souhaits'));
     renderProducts(currentFilter);
 }
 
@@ -674,7 +674,7 @@ function renderWishlistItems() {
         wishlistItems.innerHTML = `
             <div class="empty-state">
                 <i class="far fa-heart"></i>
-                <p>${translationManager?.translate('wishlist-empty') || 'Votre liste de souhaits est vide'}</p>
+                <p>${safeTranslate('wishlist-empty', 'Votre liste de souhaits est vide')}</p>
             </div>
         `;
         return;
@@ -690,7 +690,7 @@ function renderWishlistItems() {
                 <div class="wishlist-item-price">${item.price} DH</div>
                 <div class="cart-item-controls">
                     <button class="btn btn-primary btn-sm" onclick="addToCart(${item.id}); removeFromWishlist(${item.id});">
-                        <i class="fas fa-shopping-bag"></i> ${translationManager?.translate('move-to-cart') || 'Ajouter au panier'}
+                        <i class="fas fa-shopping-bag"></i> ${safeTranslate('move-to-cart', 'Ajouter au panier')}
                     </button>
                     <button class="remove-item-btn" onclick="removeFromWishlist(${item.id})">
                         <i class="fas fa-trash"></i>
@@ -814,7 +814,7 @@ function performSearch(query) {
         productsGrid.innerHTML = `
             <div class="empty-state" style="grid-column: 1 / -1;">
                 <i class="fas fa-search"></i>
-                <p>${translationManager?.translate('no-results') || 'Aucun résultat trouvé'}</p>
+                <p>${safeTranslate('no-results', 'Aucun résultat trouvé')}</p>
             </div>
         `;
         return;
@@ -891,8 +891,10 @@ function attachEventListeners() {
 
             if (isActive) {
                 closeMobileMenu();
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
             } else {
                 openMobileMenu();
+                mobileMenuToggle.setAttribute('aria-expanded', 'true');
             }
         });
     }
@@ -1023,13 +1025,19 @@ function attachEventListeners() {
     if (userToggle && userDropdown) {
         userToggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            userDropdown.classList.toggle('active');
+            const isActive = userDropdown.classList.toggle('active');
+
+            // Update ARIA attributes
+            userToggle.setAttribute('aria-expanded', isActive);
+            userDropdown.setAttribute('aria-hidden', !isActive);
         });
 
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!userToggle.contains(e.target) && !userDropdown.contains(e.target)) {
                 userDropdown.classList.remove('active');
+                userToggle.setAttribute('aria-expanded', 'false');
+                userDropdown.setAttribute('aria-hidden', 'true');
             }
         });
     }
@@ -1133,20 +1141,7 @@ function attachEventListeners() {
         modalClose.addEventListener('click', closeModal);
     }
 
-    // Smooth scroll for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-                // Close mobile menu if open
-                mainNav?.classList.remove('active');
-                mobileMenuToggle?.classList.remove('active');
-                overlay?.classList.remove('active');
-            }
-        });
-    });
+    // Smooth scroll for navigation links - handled in navigation menu code above
 
     // Scroll to top button
     const scrollToTopBtn = document.getElementById('scrollToTop');
