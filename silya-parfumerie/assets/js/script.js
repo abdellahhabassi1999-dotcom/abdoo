@@ -866,17 +866,33 @@ function attachEventListeners() {
     // Mobile menu toggle
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mainNav = document.getElementById('mainNav');
-    if (mobileMenuToggle && mainNav) {
-        mobileMenuToggle.addEventListener('click', () => {
-            const isActive = mobileMenuToggle.classList.toggle('active');
-            mainNav.classList.toggle('active');
-            document.getElementById('overlay')?.classList.toggle('active');
+    const overlay = document.getElementById('overlay');
 
-            // Lock/unlock body scroll
+    function closeMobileMenu() {
+        mainNav?.classList.remove('active');
+        mobileMenuToggle?.classList.remove('active');
+        overlay?.classList.remove('active');
+        document.body.style.overflow = '';
+        document.body.style.touchAction = '';
+    }
+
+    function openMobileMenu() {
+        mainNav?.classList.add('active');
+        mobileMenuToggle?.classList.add('active');
+        overlay?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
+    }
+
+    if (mobileMenuToggle && mainNav) {
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isActive = mainNav.classList.contains('active');
+
             if (isActive) {
-                document.body.style.overflow = 'hidden';
+                closeMobileMenu();
             } else {
-                document.body.style.overflow = '';
+                openMobileMenu();
             }
         });
     }
@@ -884,14 +900,45 @@ function attachEventListeners() {
     // Close mobile menu when clicking navigation links
     if (mainNav) {
         mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                mobileMenuToggle?.classList.remove('active');
-                document.getElementById('overlay')?.classList.remove('active');
-                document.body.style.overflow = '';
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+
+                // If it's an anchor link, handle smooth scroll
+                if (href && href.startsWith('#') && href.length > 1) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+
+                    closeMobileMenu();
+
+                    if (targetElement) {
+                        setTimeout(() => {
+                            const headerHeight = document.querySelector('.main-header')?.offsetHeight || 0;
+                            const targetPosition = targetElement.offsetTop - headerHeight;
+
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }, 300);
+                    }
+                } else {
+                    closeMobileMenu();
+                }
+
+                // Update active state
+                mainNav.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                link.classList.add('active');
             });
         });
     }
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mainNav?.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
 
     // Search toggle
     const searchToggle = document.querySelector('.search-toggle');
@@ -990,8 +1037,9 @@ function attachEventListeners() {
     // Header scroll effect
     const mainHeader = document.querySelector('.main-header');
     let lastScroll = 0;
+    let ticking = false;
 
-    window.addEventListener('scroll', () => {
+    function updateHeader() {
         const currentScroll = window.pageYOffset;
 
         if (currentScroll > 50) {
@@ -1001,20 +1049,53 @@ function attachEventListeners() {
         }
 
         lastScroll = currentScroll;
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(updateHeader);
+            ticking = true;
+        }
     }, { passive: true });
 
+    // Update active navigation on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+
+    function updateActiveNav() {
+        const scrollY = window.pageYOffset;
+        const headerHeight = mainHeader?.offsetHeight || 0;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - headerHeight - 100;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollY >= sectionTop && scrollY < sectionBottom) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav(); // Initial call
+
     // Overlay click
-    const overlay = document.getElementById('overlay');
     if (overlay) {
         overlay.addEventListener('click', () => {
             cartSidebar?.classList.remove('active');
             wishlistSidebar?.classList.remove('active');
-            mainNav?.classList.remove('active');
-            mobileMenuToggle?.classList.remove('active');
+            closeMobileMenu();
             userDropdown?.classList.remove('active');
-            overlay.classList.remove('active');
             closeModal();
             document.body.style.overflow = '';
+            document.body.style.touchAction = '';
         });
     }
 
