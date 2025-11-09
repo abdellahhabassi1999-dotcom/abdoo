@@ -1,0 +1,85 @@
+/* ====================================
+   Header Component Styles
+   Silya's Parfumerie
+   ==================================== */
+
+/*
+ * This file contains all styles related to the main header component
+ * including top bar, navigation, search bar, and mobile menu.
+ *
+ * Usage: Import this file after variables and base styles
+ * Dependencies: styles.css (for CSS variables)
+ */
+
+/* Top Bar
+   ========================================== */
+.top-bar {
+    /* Styles extracted from main styles.css */
+    /* TODO: Extract top-bar styles from styles.css */
+}
+
+/* Main Header
+   ========================================== */
+.main-header {
+    /* Styles extracted from main styles.css */
+    /* TODO: Extract main-header styles from styles.css */
+}
+
+/* Logo
+   ========================================== */
+.logo {
+    /* TODO: Extract logo styles */
+}
+
+/* Navigation
+   ========================================== */
+.main-nav {
+    /* TODO: Extract navigation styles */
+}
+
+/* Header Actions (Search, Cart, Wishlist, User)
+   ========================================== */
+.header-actions {
+    /* TODO: Extract header-actions styles */
+}
+
+.header-icon {
+    /* TODO: Extract header-icon styles */
+}
+
+/* Search Bar
+   ========================================== */
+.search-bar {
+    /* TODO: Extract search-bar styles */
+}
+
+/* Mobile Menu
+   ========================================== */
+.mobile-menu-toggle {
+    /* TODO: Extract mobile menu styles */
+}
+
+/* User Dropdown
+   ========================================== */
+.user-dropdown {
+    /* TODO: Extract user dropdown styles */
+}
+
+/* Language Switcher
+   ========================================== */
+.language-switcher {
+    /* TODO: Extract language switcher styles */
+}
+
+/* Theme Toggle
+   ========================================== */
+.theme-toggle {
+    /* TODO: Extract theme toggle styles */
+}
+
+/*
+ * IMPLEMENTATION NOTE:
+ * To complete this component, extract the relevant styles from styles.css
+ * and organize them here. This will make the header component reusable
+ * and easier to maintain.
+ */

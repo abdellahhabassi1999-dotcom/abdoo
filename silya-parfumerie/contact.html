@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contactez Silya's Parfumerie - Kénitra Mall. Service client disponible 7j/7. WhatsApp, email, téléphone.">
+    <meta name="keywords" content="contact, Silya's Parfumerie, Kénitra, service client, WhatsApp">
+    <meta property="og:title" content="Contact - Silya's Parfumerie">
+    <meta property="og:description" content="Contactez-nous pour toute question ou demande">
+    <meta property="og:type" content="website">
+
+    <title>Contact - Silya's Parfumerie</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo/favicon.png">
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p class="loader-text">Silya's Parfumerie</p>
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="announcement">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span data-translate="free-delivery">Livraison gratuite pour toute commande supérieure à 500 DH</span>
+                </div>
+                <div class="top-bar-actions">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="fr">FR</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="ar">AR</button>
+                    </div>
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html" aria-label="Silya's Parfumerie Home">
+                        <h1>Silya's</h1>
+                        <span>Parfumerie</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="main-nav" id="mainNav" aria-label="Main Navigation">
+                    <ul role="list">
+                        <li><a href="index.html" data-translate="nav-home">Accueil</a></li>
+                        <li><a href="index.html#categories" data-translate="nav-categories">Catégories</a></li>
+                        <li><a href="index.html#products" data-translate="nav-products">Produits</a></li>
+                        <li><a href="about.html" data-translate="nav-about">À Propos</a></li>
+                        <li><a href="contact.html" class="active" data-translate="nav-contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Search Toggle -->
+                    <button class="header-icon search-toggle" aria-label="Rechercher des produits" title="Rechercher">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
+
+                    <!-- Wishlist Toggle -->
+                    <button class="header-icon wishlist-toggle" aria-label="Liste de souhaits" title="Liste de souhaits">
+                        <i class="far fa-heart" aria-hidden="true"></i>
+                        <span class="badge" id="wishlistCount" aria-label="Articles dans la liste de souhaits">0</span>
+                    </button>
+
+                    <!-- Cart Toggle -->
+                    <button class="header-icon cart-toggle" aria-label="Panier" title="Panier">
+                        <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+                        <span class="badge" id="cartCount" aria-label="Articles dans le panier">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar" id="searchBar" role="search" aria-label="Recherche de produits">
+                <div class="search-input-wrapper">
+                    <input type="search" id="searchInput" placeholder="Rechercher des produits..." data-translate-placeholder="search-placeholder" aria-label="Rechercher des produits" autocomplete="off">
+                    <button class="search-submit" aria-label="Lancer la recherche">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <button class="search-close" aria-label="Fermer la recherche">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <div class="page-header-content">
+                <h1>Contactez-nous</h1>
+                <p>Nous sommes là pour répondre à toutes vos questions</p>
+                <div class="breadcrumb">
+                    <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+                    <span class="separator">/</span>
+                    <span class="current">Contact</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Methods Section -->
+    <section class="contact-methods-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Comment nous joindre ?</h2>
+                <p>Choisissez le moyen de communication qui vous convient le mieux</p>
+            </div>
+
+            <div class="contact-methods-grid">
+                <div class="contact-method-card">
+                    <div class="method-icon whatsapp-bg">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Contactez-nous directement via WhatsApp pour une réponse rapide</p>
+                    <a href="https://wa.me/212766985350" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> Envoyer un message
+                    </a>
+                </div>
+
+                <div class="contact-method-card">
+                    <div class="method-icon phone-bg">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Téléphone</h3>
+                    <p>Appelez-nous pour une assistance immédiate</p>
+                    <a href="tel:+212766985350" class="btn btn-primary">
+                        <i class="fas fa-phone"></i> +212 766 985 350
+                    </a>
+                </div>
+
+                <div class="contact-method-card">
+                    <div class="method-icon email-bg">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>Envoyez-nous un email, nous répondons sous 24h</p>
+                    <a href="mailto:contact@silyasparfumerie.ma" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Envoyer un email
+                    </a>
+                </div>
+
+                <div class="contact-method-card">
+                    <div class="method-icon location-bg">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Visitez-nous</h3>
+                    <p>Venez nous rencontrer dans notre boutique</p>
+                    <a href="#location" class="btn btn-primary">
+                        <i class="fas fa-map-marker-alt"></i> Voir l'adresse
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="contact-form-grid">
+                <div class="form-info">
+                    <h2>Envoyez-nous un message</h2>
+                    <p>Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.</p>
+
+                    <div class="info-items">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4>Heures d'ouverture</h4>
+                                <p>Lundi - Dimanche: 10:00 - 22:00</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4>Support Client</h4>
+                                <p>Disponible 7 jours sur 7</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-reply"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4>Temps de réponse</h4>
+                                <p>Moins de 24 heures</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-follow">
+                        <h4>Suivez-nous sur les réseaux sociaux</h4>
+                        <div class="social-links-large">
+                            <a href="https://instagram.com/silya_parfumerie" target="_blank" class="social-link instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="https://facebook.com/silyasparfumerie" target="_blank" class="social-link facebook">
+                                <i class="fab fa-facebook"></i>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="https://tiktok.com/@silya_parfumerie" target="_blank" class="social-link tiktok">
+                                <i class="fab fa-tiktok"></i>
+                                <span>TikTok</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nom complet *</label>
+                                <input type="text" id="name" name="name" class="form-control" required placeholder="Votre nom">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Téléphone *</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" required placeholder="+212 6XX XXX XXX">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" class="form-control" required placeholder="votre@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Sujet *</label>
+                            <select id="subject" name="subject" class="form-control" required>
+                                <option value="">Sélectionnez un sujet</option>
+                                <option value="product-inquiry">Question sur un produit</option>
+                                <option value="order-status">Statut de commande</option>
+                                <option value="complaint">Réclamation</option>
+                                <option value="suggestion">Suggestion</option>
+                                <option value="partnership">Partenariat</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" class="form-control" rows="6" required placeholder="Écrivez votre message ici..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-wrapper">
+                                <input type="checkbox" id="agreePrivacy" name="agreePrivacy" required>
+                                <span>J'accepte que mes données soient traitées conformément à la politique de confidentialité *</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                            <i class="fas fa-paper-plane"></i> Envoyer le message
+                        </button>
+
+                        <div id="formMessage" class="form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section" id="location">
+        <div class="container">
+            <div class="section-header">
+                <h2>Notre Emplacement</h2>
+                <p>Visitez notre boutique au Kénitra Mall</p>
+            </div>
+
+            <div class="location-details-grid">
+                <div class="location-map-container">
+                    <!-- Placeholder for Google Maps -->
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Kénitra Mall</h3>
+                        <p>1er étage - Magasin n°82</p>
+                        <a href="https://goo.gl/maps/example" target="_blank" class="btn btn-secondary">
+                            <i class="fas fa-directions"></i> Obtenir l'itinéraire
+                        </a>
+                    </div>
+                </div>
+
+                <div class="location-details">
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h4>Adresse</h4>
+                            <p>Kénitra Mall, 1er étage<br>Magasin n°82<br>Kénitra, Maroc</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h4>Horaires</h4>
+                            <ul class="hours-list">
+                                <li><span>Lundi - Vendredi:</span> <strong>10:00 - 22:00</strong></li>
+                                <li><span>Samedi:</span> <strong>10:00 - 22:00</strong></li>
+                                <li><span>Dimanche:</span> <strong>10:00 - 22:00</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-parking"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h4>Parking</h4>
+                            <p>Parking gratuit disponible au Kénitra Mall</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <i class="fas fa-universal-access"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h4>Accessibilité</h4>
+                            <p>Boutique accessible aux personnes à mobilité réduite</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Questions Fréquentes</h2>
+                <p>Trouvez rapidement des réponses à vos questions</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Comment passer une commande ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous pouvez passer commande directement sur notre site web en ajoutant les produits à votre panier, ou via WhatsApp en nous contactant au +212 766 985 350. Nous confirmerons votre commande et vous enverrons les détails de livraison.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Quels sont les modes de paiement acceptés ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons le paiement à la livraison (cash), le virement bancaire, et les cartes bancaires Visa et Mastercard.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Quel est le délai de livraison ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>La livraison prend généralement entre 2 à 5 jours ouvrables selon votre localisation au Maroc. Les commandes pour Kénitra et environs peuvent être livrées en 24-48h.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>La livraison est-elle gratuite ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui ! La livraison est gratuite pour toute commande supérieure à 500 DH. Pour les commandes inférieures, les frais de livraison sont de 30 DH.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Vos produits sont-ils authentiques ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolument ! Nous garantissons l'authenticité de tous nos produits. Chaque article provient directement de distributeurs officiels et certifiés.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Puis-je retourner un produit ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Les retours sont acceptés dans les 7 jours suivant la réception, à condition que le produit soit non ouvert et dans son emballage d'origine. Contactez-nous pour initier un retour.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Column 1: About -->
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <h3>Silya's</h3>
+                        <span>Parfumerie</span>
+                    </div>
+                    <p data-translate="footer-about">
+                        Votre destination beauté à Kénitra. Parfums authentiques et cosmétiques de luxe.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/silya_parfumerie" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/silyasparfumerie" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://wa.me/212766985350" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://tiktok.com/@silya_parfumerie" target="_blank" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Footer Column 2: Quick Links -->
+                <div class="footer-column">
+                    <h4 data-translate="footer-links-title">Liens Rapides</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" data-translate="nav-home">Accueil</a></li>
+                        <li><a href="index.html#categories" data-translate="nav-categories">Catégories</a></li>
+                        <li><a href="index.html#products" data-translate="nav-products">Produits</a></li>
+                        <li><a href="about.html" data-translate="nav-about">À Propos</a></li>
+                        <li><a href="contact.html" data-translate="nav-contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Column 3: Categories -->
+                <div class="footer-column">
+                    <h4 data-translate="footer-categories-title">Catégories</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#products" data-category="parfums" data-translate="cat-parfums">Parfums</a></li>
+                        <li><a href="index.html#products" data-category="skincare" data-translate="cat-skincare">Soins de la Peau</a></li>
+                        <li><a href="index.html#products" data-category="makeup" data-translate="cat-makeup">Maquillage</a></li>
+                        <li><a href="index.html#products" data-category="haircare" data-translate="cat-haircare">Soins Capillaires</a></li>
+                        <li><a href="index.html#products" data-category="gifts" data-translate="cat-gifts">Coffrets Cadeaux</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Column 4: Contact -->
+                <div class="footer-column">
+                    <h4 data-translate="footer-contact-title">Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kénitra Mall, 1er étage<br>Magasin n°82, Kénitra</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+212766985350">+212 766 985 350</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:contact@silyasparfumerie.ma">contact@silyasparfumerie.ma</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span data-translate="footer-hours">10:00 - 22:00 (Tous les jours)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 Silya's Parfumerie. <span data-translate="footer-rights">Tous droits réservés.</span></p>
+                <div class="payment-methods">
+                    <i class="fas fa-money-bill-wave" title="Cash"></i>
+                    <i class="fas fa-credit-card" title="Card"></i>
+                    <i class="fab fa-cc-visa" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 data-translate="cart-title">Panier</h3>
+            <button class="cart-close" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span data-translate="cart-total">Total:</span>
+                <span class="total-amount" id="cartTotal">0 DH</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn" data-translate="cart-checkout">
+                Commander via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3 data-translate="wishlist-title">Ma Liste de Souhaits</h3>
+            <button class="wishlist-close" aria-label="Close wishlist">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems">
+            <!-- Wishlist items will be loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="assets/js/translations.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Contact Form Handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            const formMessage = document.getElementById('formMessage');
+
+            // Simulate form submission
+            formMessage.className = 'form-message loading';
+            formMessage.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+
+            setTimeout(() => {
+                formMessage.className = 'form-message success';
+                formMessage.innerHTML = '<i class="fas fa-check-circle"></i> Merci ! Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.';
+                this.reset();
+
+                // Clear message after 5 seconds
+                setTimeout(() => {
+                    formMessage.innerHTML = '';
+                    formMessage.className = 'form-message';
+                }, 5000);
+            }, 1500);
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

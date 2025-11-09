@@ -1,0 +1,136 @@
+[
+  {
+    "id": "ORD-20241109001",
+    "orderNumber": "ORD-20241109001",
+    "date": "2024-11-09T10:30:00Z",
+    "status": "delivered",
+    "customer": {
+      "name": "Fatima El Amrani",
+      "email": "fatima.elamrani@email.com",
+      "phone": "+212 661 234 567",
+      "address": "45 Rue Mohamed V, Kénitra",
+      "city": "Kénitra"
+    },
+    "items": [
+      {
+        "id": "1",
+        "name": "Coffret Cadeau Luxe",
+        "quantity": 1,
+        "price": 899,
+        "image": "assets/images/products/gift-set.jpg"
+      },
+      {
+        "id": "2",
+        "name": "Chanel No. 5 Eau de Parfum",
+        "quantity": 1,
+        "price": 1250,
+        "image": "assets/images/products/chanel-no5.jpg"
+      }
+    ],
+    "payment": {
+      "method": "cod",
+      "status": "paid",
+      "amount": 2149
+    },
+    "shipping": {
+      "method": "standard",
+      "fee": 0,
+      "estimatedDelivery": "2024-11-12"
+    },
+    "totals": {
+      "subtotal": 2149,
+      "shipping": 0,
+      "discount": 0,
+      "total": 2149
+    },
+    "notes": "",
+    "tracking": {
+      "number": "TRK-2024110901",
+      "carrier": "Amana",
+      "status": "delivered",
+      "updates": [
+        {
+          "date": "2024-11-09T10:30:00Z",
+          "status": "pending",
+          "description": "Commande reçue"
+        },
+        {
+          "date": "2024-11-09T14:00:00Z",
+          "status": "processing",
+          "description": "Commande en préparation"
+        },
+        {
+          "date": "2024-11-10T09:00:00Z",
+          "status": "shipped",
+          "description": "Commande expédiée"
+        },
+        {
+          "date": "2024-11-11T16:30:00Z",
+          "status": "delivered",
+          "description": "Commande livrée"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ORD-20241108002",
+    "orderNumber": "ORD-20241108002",
+    "date": "2024-11-08T15:45:00Z",
+    "status": "shipped",
+    "customer": {
+      "name": "Ahmed Benjelloun",
+      "email": "ahmed.benjelloun@email.com",
+      "phone": "+212 662 345 678",
+      "address": "12 Avenue Hassan II, Rabat",
+      "city": "Rabat"
+    },
+    "items": [
+      {
+        "id": "3",
+        "name": "Dior Sauvage EDT",
+        "quantity": 2,
+        "price": 950,
+        "image": "assets/images/products/dior-sauvage.jpg"
+      }
+    ],
+    "payment": {
+      "method": "card",
+      "status": "paid",
+      "amount": 1900
+    },
+    "shipping": {
+      "method": "standard",
+      "fee": 0,
+      "estimatedDelivery": "2024-11-13"
+    },
+    "totals": {
+      "subtotal": 1900,
+      "shipping": 0,
+      "discount": 0,
+      "total": 1900
+    },
+    "notes": "",
+    "tracking": {
+      "number": "TRK-2024110802",
+      "carrier": "Amana",
+      "status": "in_transit",
+      "updates": [
+        {
+          "date": "2024-11-08T15:45:00Z",
+          "status": "pending",
+          "description": "Commande reçue"
+        },
+        {
+          "date": "2024-11-08T18:00:00Z",
+          "status": "processing",
+          "description": "Commande en préparation"
+        },
+        {
+          "date": "2024-11-09T10:00:00Z",
+          "status": "shipped",
+          "description": "Commande expédiée"
+        }
+      ]
+    }
+  }
+]

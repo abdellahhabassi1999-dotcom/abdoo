@@ -1,0 +1,191 @@
+{
+  "site": {
+    "name": "Silya's Parfumerie",
+    "tagline": "Beauté & Élégance",
+    "description": "Votre destination beauté à Kénitra. Parfums authentiques et cosmétiques de luxe.",
+    "url": "https://silyasparfumerie.com",
+    "logo": "assets/images/logo/logo.png",
+    "favicon": "assets/images/logo/favicon.png"
+  },
+  "business": {
+    "name": "Silya's Parfumerie",
+    "legalName": "Silya's Parfumerie SARL",
+    "registrationNumber": "",
+    "taxId": "",
+    "address": {
+      "street": "Kénitra Mall, 1er étage",
+      "unit": "Magasin n°82",
+      "city": "Kénitra",
+      "postalCode": "14000",
+      "country": "Maroc"
+    },
+    "contact": {
+      "phone": "+212 766 985 350",
+      "email": "contact@silyasparfumerie.ma",
+      "whatsapp": "212766985350"
+    },
+    "hours": {
+      "monday": "10:00 - 22:00",
+      "tuesday": "10:00 - 22:00",
+      "wednesday": "10:00 - 22:00",
+      "thursday": "10:00 - 22:00",
+      "friday": "10:00 - 22:00",
+      "saturday": "10:00 - 22:00",
+      "sunday": "10:00 - 22:00"
+    }
+  },
+  "ecommerce": {
+    "currency": {
+      "code": "MAD",
+      "symbol": "DH",
+      "position": "after",
+      "decimals": 2
+    },
+    "shipping": {
+      "freeThreshold": 500,
+      "standardFee": 30,
+      "estimatedDays": "2-5",
+      "regions": ["Tout le Maroc"],
+      "carriers": ["Amana", "CTM"]
+    },
+    "payment": {
+      "methods": ["cod", "bank_transfer", "card"],
+      "defaultMethod": "cod",
+      "acceptedCards": ["visa", "mastercard"]
+    },
+    "orders": {
+      "minAmount": 50,
+      "maxAmount": 50000,
+      "autoConfirm": false,
+      "cancelWindow": 24,
+      "returnWindow": 7
+    },
+    "products": {
+      "perPage": 12,
+      "loadMoreIncrement": 12,
+      "maxQuantityPerOrder": 10,
+      "showOutOfStock": true,
+      "lowStockThreshold": 5
+    }
+  },
+  "features": {
+    "multiLanguage": true,
+    "darkMode": true,
+    "wishlist": true,
+    "cart": true,
+    "search": true,
+    "productFilters": true,
+    "quickView": true,
+    "whatsappOrder": true,
+    "reviews": true,
+    "ratings": true,
+    "relatedProducts": true,
+    "newsletter": true,
+    "loyalty": false,
+    "giftCards": false
+  },
+  "languages": {
+    "default": "fr",
+    "supported": ["fr", "en", "ar"],
+    "rtl": ["ar"]
+  },
+  "theme": {
+    "default": "light",
+    "allowToggle": true,
+    "colors": {
+      "primary": "#C8A882",
+      "secondary": "#A08968",
+      "accent": "#8B7355",
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "error": "#EF4444",
+      "info": "#3B82F6"
+    }
+  },
+  "seo": {
+    "metaTitle": "Silya's Parfumerie - Beauté & Élégance | Kénitra",
+    "metaDescription": "Votre destination beauté à Kénitra. Parfums authentiques, cosmétiques de qualité premium, soins de beauté. Livraison partout au Maroc.",
+    "metaKeywords": "parfumerie, cosmétiques, beauté, Kénitra, Maroc, parfums, maquillage, soins",
+    "ogImage": "assets/images/og-image.jpg",
+    "twitterCard": "summary_large_image",
+    "googleAnalyticsId": "",
+    "facebookPixelId": "",
+    "googleVerification": "",
+    "bingVerification": ""
+  },
+  "socialMedia": {
+    "instagram": "https://instagram.com/silya_parfumerie",
+    "facebook": "https://facebook.com/silyasparfumerie",
+    "tiktok": "https://tiktok.com/@silya_parfumerie",
+    "whatsapp": "https://wa.me/212766985350",
+    "youtube": "",
+    "twitter": "",
+    "pinterest": ""
+  },
+  "integrations": {
+    "whatsapp": {
+      "enabled": true,
+      "phoneNumber": "212766985350",
+      "businessName": "Silya's Parfumerie"
+    },
+    "email": {
+      "provider": "smtp",
+      "from": "noreply@silyasparfumerie.ma",
+      "replyTo": "contact@silyasparfumerie.ma"
+    },
+    "sms": {
+      "enabled": false,
+      "provider": "",
+      "sender": "Silya's"
+    },
+    "analytics": {
+      "enabled": false,
+      "providers": []
+    }
+  },
+  "admin": {
+    "sessionTimeout": 7,
+    "autoSaveInterval": 5,
+    "maxLoginAttempts": 5,
+    "lockoutDuration": 5,
+    "allowRegistration": false,
+    "requireEmailVerification": false
+  },
+  "security": {
+    "enableCaptcha": false,
+    "captchaProvider": "",
+    "enableRateLimit": true,
+    "maxRequestsPerMinute": 60,
+    "enableCSRF": true,
+    "enableXSSProtection": true
+  },
+  "performance": {
+    "enableCache": true,
+    "cacheDuration": 3600,
+    "lazyLoadImages": true,
+    "minifyAssets": false,
+    "enableServiceWorker": false,
+    "enableCompression": true
+  },
+  "notifications": {
+    "orderConfirmation": true,
+    "orderShipped": true,
+    "orderDelivered": true,
+    "lowStock": true,
+    "newReview": false,
+    "newsletter": true
+  },
+  "loyalty": {
+    "enabled": false,
+    "pointsPerDirham": 1,
+    "pointsRedemptionValue": 0.01,
+    "minimumPointsToRedeem": 100,
+    "pointsExpiration": 365
+  },
+  "promotions": {
+    "enableCoupons": true,
+    "enableBulkDiscounts": false,
+    "enableFlashSales": false,
+    "maxDiscountPercent": 70
+  }
+}

@@ -1,0 +1,142 @@
+/* ====================================
+   Home Page Styles
+   Silya's Parfumerie
+   ==================================== */
+
+/*
+ * This file contains styles specific to the homepage
+ * including hero slider, features bar, and sections layout.
+ *
+ * Usage: Import this file only on index.html
+ * Dependencies: styles.css, components/header.css, components/footer.css
+ */
+
+/* Hero Slider Section
+   ========================================== */
+.hero-slider {
+    /* TODO: Extract hero-slider styles from styles.css */
+}
+
+.slide {
+    /* TODO: Individual slide styles */
+}
+
+.slide-image {
+    /* TODO: Slide image container */
+}
+
+.slide-content {
+    /* TODO: Slide content overlay */
+}
+
+.slide-text {
+    /* TODO: Slide text content */
+}
+
+.slider-control {
+    /* TODO: Previous/Next buttons */
+}
+
+.slider-pagination {
+    /* TODO: Dot pagination */
+}
+
+.slide-counter {
+    /* TODO: Slide counter (01/05) */
+}
+
+/* Features Bar Section
+   ========================================== */
+.features-bar {
+    /* TODO: Extract features-bar styles */
+}
+
+.features-grid {
+    /* TODO: Features grid layout */
+}
+
+.feature-item {
+    /* TODO: Individual feature item */
+}
+
+/* Categories Section
+   ========================================== */
+.categories-section {
+    /* TODO: Extract categories section styles */
+}
+
+.categories-grid {
+    /* TODO: Categories grid layout */
+}
+
+.category-card {
+    /* TODO: Category card styles */
+}
+
+/* Products Section
+   ========================================== */
+.products-section {
+    /* TODO: Extract products section styles */
+}
+
+.product-filters {
+    /* TODO: Filter buttons */
+}
+
+.advanced-filters {
+    /* TODO: Advanced filters panel */
+}
+
+.filters-panel {
+    /* TODO: Expandable filters */
+}
+
+.products-grid {
+    /* TODO: Products grid layout */
+}
+
+/* Instagram Section
+   ========================================== */
+.instagram-section {
+    /* TODO: Extract Instagram section */
+}
+
+.instagram-grid {
+    /* TODO: Instagram grid layout */
+}
+
+.instagram-item {
+    /* TODO: Individual Instagram post */
+}
+
+/* About Section (Homepage preview)
+   ========================================== */
+.about-section {
+    /* TODO: Extract about section styles */
+}
+
+.about-content {
+    /* TODO: About content layout */
+}
+
+/* Section Headers (Reusable)
+   ========================================== */
+.section-header {
+    /* TODO: Common section header styles */
+}
+
+.section-label {
+    /* TODO: Small label above title */
+}
+
+/* Load More Button
+   ========================================== */
+.load-more-wrapper {
+    /* TODO: Load more button container */
+}
+
+/*
+ * IMPLEMENTATION NOTE:
+ * Extract these styles from styles.css to keep the homepage
+ * styles separate and maintainable.
+ */

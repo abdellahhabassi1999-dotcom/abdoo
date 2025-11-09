@@ -1,0 +1,155 @@
+/* ====================================
+   Product Card Component Styles
+   Silya's Parfumerie
+   ==================================== */
+
+/*
+ * This file contains all styles for product card components
+ * used in product grids, search results, and related products.
+ *
+ * Usage: Import this file for pages displaying products
+ * Dependencies: styles.css (for CSS variables)
+ */
+
+/* Product Card Container
+   ========================================== */
+.product-card {
+    /* TODO: Extract product-card styles from styles.css */
+}
+
+/* Product Image
+   ========================================== */
+.product-image {
+    /* TODO: Extract product-image styles */
+}
+
+/* Product Badges (New, Sale, Bestseller)
+   ========================================== */
+.product-badge {
+    /* TODO: Extract badge styles */
+}
+
+.badge-new {
+    /* TODO: New badge styles */
+}
+
+.badge-sale {
+    /* TODO: Sale badge styles */
+}
+
+.badge-bestseller {
+    /* TODO: Bestseller badge styles */
+}
+
+/* Product Info
+   ========================================== */
+.product-info {
+    /* TODO: Extract product-info styles */
+}
+
+.product-brand {
+    /* TODO: Brand styles */
+}
+
+.product-name {
+    /* TODO: Name styles */
+}
+
+.product-category {
+    /* TODO: Category styles */
+}
+
+/* Product Rating
+   ========================================== */
+.product-rating {
+    /* TODO: Extract rating styles */
+}
+
+.rating-stars {
+    /* TODO: Stars styles */
+}
+
+.rating-count {
+    /* TODO: Count styles */
+}
+
+/* Product Price
+   ========================================== */
+.product-price {
+    /* TODO: Extract price styles */
+}
+
+.price-original {
+    /* TODO: Original price (strikethrough) */
+}
+
+.price-current {
+    /* TODO: Current/sale price */
+}
+
+.price-discount {
+    /* TODO: Discount percentage */
+}
+
+/* Product Actions
+   ========================================== */
+.product-actions {
+    /* TODO: Extract product-actions styles */
+}
+
+.btn-add-to-cart {
+    /* TODO: Add to cart button */
+}
+
+.btn-quick-view {
+    /* TODO: Quick view button */
+}
+
+.btn-add-to-wishlist {
+    /* TODO: Wishlist button */
+}
+
+/* Product Stock Status
+   ========================================== */
+.stock-status {
+    /* TODO: Stock status indicator */
+}
+
+.in-stock {
+    /* TODO: In stock styles */
+}
+
+.out-of-stock {
+    /* TODO: Out of stock styles */
+}
+
+.low-stock {
+    /* TODO: Low stock warning */
+}
+
+/* Product Card Hover Effects
+   ========================================== */
+.product-card:hover {
+    /* TODO: Hover state */
+}
+
+/* Product Card Variations
+   ========================================== */
+.product-card--featured {
+    /* TODO: Featured product variant */
+}
+
+.product-card--compact {
+    /* TODO: Compact variant for sidebars */
+}
+
+.product-card--list {
+    /* TODO: List view variant */
+}
+
+/*
+ * IMPLEMENTATION NOTE:
+ * To complete this component, extract the relevant styles from styles.css
+ * and organize them here. Consider using BEM naming convention for
+ * better maintainability: .product-card__element--modifier
+ */

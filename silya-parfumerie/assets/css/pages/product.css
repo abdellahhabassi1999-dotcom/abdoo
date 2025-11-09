@@ -1,0 +1,166 @@
+/* ====================================
+   Product Details Page Styles
+   Silya's Parfumerie
+   ==================================== */
+
+/*
+ * This file contains styles specific to the product details page
+ * including product gallery, info, reviews, and related products.
+ *
+ * Usage: Import this file only on product-details.html
+ * Dependencies: styles.css, product-details.css (existing)
+ */
+
+/* Product Details Layout
+   ========================================== */
+.product-details-page {
+    /* TODO: Extract from product-details.css */
+}
+
+/* Breadcrumb Navigation
+   ========================================== */
+.breadcrumb {
+    /* TODO: Breadcrumb styles */
+}
+
+/* Product Gallery
+   ========================================== */
+.product-gallery {
+    /* TODO: Image gallery container */
+}
+
+.gallery-main {
+    /* TODO: Main product image */
+}
+
+.gallery-thumbnails {
+    /* TODO: Thumbnail images grid */
+}
+
+.gallery-zoom {
+    /* TODO: Image zoom functionality */
+}
+
+/* Product Information
+   ========================================== */
+.product-information {
+    /* TODO: Product info container */
+}
+
+.product-title {
+    /* TODO: Product name/title */
+}
+
+.product-brand {
+    /* TODO: Brand name */
+}
+
+.product-sku {
+    /* TODO: SKU/product code */
+}
+
+.product-rating-section {
+    /* TODO: Rating and reviews summary */
+}
+
+.product-price-section {
+    /* TODO: Price display section */
+}
+
+.product-description {
+    /* TODO: Product description */
+}
+
+/* Product Options/Variations
+   ========================================== */
+.product-options {
+    /* TODO: Size, color, scent options */
+}
+
+.option-group {
+    /* TODO: Individual option group */
+}
+
+.option-button {
+    /* TODO: Selectable option button */
+}
+
+/* Quantity Selector
+   ========================================== */
+.quantity-selector {
+    /* TODO: Quantity input with +/- buttons */
+}
+
+/* Add to Cart Section
+   ========================================== */
+.add-to-cart-section {
+    /* TODO: Add to cart button area */
+}
+
+/* Product Tabs (Description, Ingredients, Reviews)
+   ========================================== */
+.product-tabs {
+    /* TODO: Tab navigation */
+}
+
+.tab-nav {
+    /* TODO: Tab buttons */
+}
+
+.tab-content {
+    /* TODO: Tab content panels */
+}
+
+/* Product Reviews
+   ========================================== */
+.product-reviews {
+    /* TODO: Reviews section */
+}
+
+.review-item {
+    /* TODO: Individual review */
+}
+
+.review-rating {
+    /* TODO: Star rating */
+}
+
+.review-author {
+    /* TODO: Reviewer name/date */
+}
+
+.review-text {
+    /* TODO: Review content */
+}
+
+.review-form {
+    /* TODO: Write review form */
+}
+
+/* Related Products
+   ========================================== */
+.related-products {
+    /* TODO: Related products section */
+}
+
+.related-products-grid {
+    /* TODO: Related products grid */
+}
+
+/* Recently Viewed
+   ========================================== */
+.recently-viewed {
+    /* TODO: Recently viewed products */
+}
+
+/* Sticky Add to Cart (Mobile)
+   ========================================== */
+.sticky-add-to-cart {
+    /* TODO: Sticky footer on mobile */
+}
+
+/*
+ * IMPLEMENTATION NOTE:
+ * This file should work alongside the existing product-details.css
+ * Gradually migrate styles from product-details.css here for better organization.
+ */

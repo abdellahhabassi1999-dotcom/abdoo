@@ -1,0 +1,161 @@
+/* ====================================
+   Modal Component Styles
+   Silya's Parfumerie
+   ==================================== */
+
+/*
+ * This file contains all styles for modal dialogs including
+ * quick view, checkout, confirmation, and generic modals.
+ *
+ * Usage: Import this file for pages using modal dialogs
+ * Dependencies: styles.css (for CSS variables)
+ */
+
+/* Base Modal Styles
+   ========================================== */
+.modal {
+    /* TODO: Extract modal base styles from styles.css */
+}
+
+.modal-overlay {
+    /* TODO: Dark overlay background */
+}
+
+.modal-content {
+    /* TODO: Modal content container */
+}
+
+.modal-header {
+    /* TODO: Modal header section */
+}
+
+.modal-body {
+    /* TODO: Modal body content */
+}
+
+.modal-footer {
+    /* TODO: Modal footer with actions */
+}
+
+.modal-close {
+    /* TODO: Close button */
+}
+
+/* Modal Animations
+   ========================================== */
+.modal.active {
+    /* TODO: Active/open state */
+}
+
+.modal-fade-in {
+    /* TODO: Fade in animation */
+}
+
+.modal-fade-out {
+    /* TODO: Fade out animation */
+}
+
+.modal-slide-up {
+    /* TODO: Slide up animation */
+}
+
+/* Quick View Modal
+   ========================================== */
+.quick-view-modal {
+    /* TODO: Extract quick-view styles */
+}
+
+.quick-view-content {
+    /* TODO: Quick view content layout */
+}
+
+.quick-view-image {
+    /* TODO: Product image section */
+}
+
+.quick-view-details {
+    /* TODO: Product details section */
+}
+
+/* Checkout Modal
+   ========================================== */
+.checkout-modal {
+    /* TODO: Extract checkout modal styles */
+}
+
+.checkout-modal .modal-content {
+    /* TODO: Larger content area for checkout */
+}
+
+/* Confirmation Modal
+   ========================================== */
+.confirmation-modal {
+    /* TODO: Extract confirmation styles */
+}
+
+.confirmation-icon {
+    /* TODO: Success/error icon */
+}
+
+.confirmation-message {
+    /* TODO: Message text */
+}
+
+/* Cart/Wishlist Sidebars (Modal-like)
+   ========================================== */
+.cart-sidebar,
+.wishlist-sidebar {
+    /* TODO: Extract sidebar modal styles */
+}
+
+.cart-sidebar.active,
+.wishlist-sidebar.active {
+    /* TODO: Active/open state */
+}
+
+/* Modal Size Variants
+   ========================================== */
+.modal-sm {
+    /* TODO: Small modal (400px) */
+}
+
+.modal-md {
+    /* TODO: Medium modal (600px) - default */
+}
+
+.modal-lg {
+    /* TODO: Large modal (900px) */
+}
+
+.modal-xl {
+    /* TODO: Extra large modal (1200px) */
+}
+
+.modal-fullscreen {
+    /* TODO: Fullscreen modal */
+}
+
+/* Modal Responsive Behavior
+   ========================================== */
+@media (max-width: 768px) {
+    .modal-content {
+        /* TODO: Full width on mobile */
+    }
+}
+
+/* Accessibility
+   ========================================== */
+.modal[aria-hidden="true"] {
+    /* TODO: Hidden state for screen readers */
+}
+
+.modal-close:focus {
+    /* TODO: Focus indicator */
+}
+
+/*
+ * IMPLEMENTATION NOTE:
+ * To complete this component, extract the relevant styles from styles.css
+ * and organize them here. Ensure proper focus management and keyboard
+ * navigation for accessibility.
+ */
