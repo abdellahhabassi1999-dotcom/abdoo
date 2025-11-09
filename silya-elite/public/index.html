@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Silya's Parfumerie Elite - Next-Generation E-Commerce</title>
+
+    <!-- Meta Tags -->
+    <meta name="description" content="Experience the future of online perfume shopping with Silya's Elite - Advanced e-commerce platform with real-time features, AI recommendations, and seamless checkout.">
+    <meta name="keywords" content="luxury perfumes, elite shopping, online cosmetics, Kénitra perfumery, advanced ecommerce">
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#8B5CF6">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <link rel="stylesheet" href="../src/styles/components.css">
+    <link rel="stylesheet" href="../src/styles/animations.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Critical CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --secondary: #EC4899;
+            --accent: #F59E0B;
+            --success: #10B981;
+            --error: #EF4444;
+            --warning: #F59E0B;
+            --info: #3B82F6;
+
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F9FAFB;
+            --bg-tertiary: #F3F4F6;
+
+            --text-primary: #111827;
+            --text-secondary: #6B7280;
+            --text-tertiary: #9CA3AF;
+
+            --border: #E5E7EB;
+            --shadow: rgba(0, 0, 0, 0.1);
+
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-display: 'Playfair Display', serif;
+
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #111827;
+            --bg-secondary: #1F2937;
+            --bg-tertiary: #374151;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --text-tertiary: #9CA3AF;
+            --border: #374151;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        #app-loader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        #app-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loader-logo {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        /* App Container */
+        #app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="app-loader">
+        <div class="loader-content">
+            <div class="loader-logo">Silya's Elite</div>
+            <div class="loader-spinner"></div>
+            <p>Loading revolutionary experience...</p>
+        </div>
+    </div>
+
+    <!-- App Container -->
+    <div id="app"></div>
+
+    <!-- Core Framework -->
+    <script src="../src/core/framework.js"></script>
+
+    <!-- Store & State -->
+    <script src="../src/store/index.js"></script>
+
+    <!-- Services -->
+    <script src="../src/services/api.js"></script>
+    <script src="../src/services/cart.js"></script>
+    <script src="../src/services/auth.js"></script>
+    <script src="../src/services/payment.js"></script>
+
+    <!-- Components -->
+    <script src="../src/components/Header.js"></script>
+    <script src="../src/components/ProductCard.js"></script>
+    <script src="../src/components/Cart.js"></script>
+    <script src="../src/components/SearchBar.js"></script>
+
+    <!-- Pages -->
+    <script src="../src/pages/Home.js"></script>
+    <script src="../src/pages/Products.js"></script>
+    <script src="../src/pages/ProductDetail.js"></script>
+    <script src="../src/pages/Checkout.js"></script>
+
+    <!-- Main App -->
+    <script src="../src/main.js"></script>
+
+    <!-- Analytics -->
+    <script>
+        // Track performance
+        window.addEventListener('load', () => {
+            const perfData = performance.timing;
+            const loadTime = perfData.loadEventEnd - perfData.navigationStart;
+            console.log(`⚡ Page loaded in ${loadTime}ms`);
+        });
+
+        // Hide loader
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('app-loader').classList.add('hidden');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
