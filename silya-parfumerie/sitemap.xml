@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+    <!-- Homepage -->
+    <url>
+        <loc>https://silyasparfumerie.ma/</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Product Details Page -->
+    <url>
+        <loc>https://silyasparfumerie.ma/product-details.html</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- My Orders Page -->
+    <url>
+        <loc>https://silyasparfumerie.ma/my-orders.html</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Individual Product Pages (add dynamically in production) -->
+    <!-- Category: Parfums -->
+    <url>
+        <loc>https://silyasparfumerie.ma/product-details.html?id=1</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&amp;q=80</image:loc>
+            <image:title>Dior Sauvage Eau de Parfum</image:title>
+        </image:image>
+    </url>
+
+    <url>
+        <loc>https://silyasparfumerie.ma/product-details.html?id=2</loc>
+        <lastmod>2025-11-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&amp;q=80</image:loc>
+            <image:title>Chanel N°5 Eau de Parfum</image:title>
+        </image:image>
+    </url>
+
+    <!-- Note: In production, generate this dynamically from your product database -->
+    <!-- For now, this is a sample. Add all 52 products for complete SEO -->
+
+</urlset>

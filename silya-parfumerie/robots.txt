@@ -1,0 +1,45 @@
+# robots.txt for Silya's Parfumerie
+# https://silyasparfumerie.ma/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /config/
+Disallow: /assets/data/
+Disallow: /Documentation/
+
+# Sitemaps
+Sitemap: https://silyasparfumerie.ma/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Block bad bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Note: Update sitemap URL after deployment
