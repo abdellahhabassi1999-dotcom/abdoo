@@ -1,0 +1,52 @@
+import type { TeamMember } from "@/types";
+
+export const team: TeamMember[] = [
+  {
+    id: "team-1",
+    name: "Dr. Elizabeth Morgan",
+    role: "Founder & CEO",
+    bio: "Former Dean of Graduate Studies at Princeton University with 25+ years of experience in academic leadership and faculty development. Dr. Morgan founded AcademiaPath to democratize access to high-quality professional development for academics worldwide.",
+    image: "https://i.pravatar.cc/300?img=47",
+    linkedin: "https://linkedin.com/in/elizabethmorgan",
+    twitter: "https://twitter.com/emorgan_phd",
+    email: "e.morgan@academiapath.com",
+  },
+  {
+    id: "team-2",
+    name: "Dr. James Patterson",
+    role: "Chief Academic Officer",
+    bio: "Award-winning researcher and educator with expertise in curriculum design and online learning. Dr. Patterson oversees all course development and instructor partnerships, ensuring the highest quality educational experiences.",
+    image: "https://i.pravatar.cc/300?img=13",
+    linkedin: "https://linkedin.com/in/jamespatterson",
+    email: "j.patterson@academiapath.com",
+  },
+  {
+    id: "team-3",
+    name: "Dr. Aisha Patel",
+    role: "Director of Research & Innovation",
+    bio: "Leading expert in research methodology and grant acquisition with over $50M in secured funding. Dr. Patel develops our research-focused programs and maintains partnerships with major funding agencies.",
+    image: "https://i.pravatar.cc/300?img=20",
+    linkedin: "https://linkedin.com/in/aishapatel",
+    twitter: "https://twitter.com/apatel_research",
+    email: "a.patel@academiapath.com",
+  },
+  {
+    id: "team-4",
+    name: "Marcus Chen",
+    role: "Head of Technology & Platform",
+    bio: "Former lead engineer at EdTech startups with a passion for creating accessible, user-friendly learning platforms. Marcus ensures our technology serves the needs of busy academics with intuitive design and robust functionality.",
+    image: "https://i.pravatar.cc/300?img=33",
+    linkedin: "https://linkedin.com/in/marcuschen",
+    email: "m.chen@academiapath.com",
+  },
+  {
+    id: "team-5",
+    name: "Dr. Sarah Kim",
+    role: "Director of Community & Engagement",
+    bio: "Specialist in academic community building and professional networking. Dr. Kim manages our learner community, organizes events, and facilitates connections that extend beyond course completion.",
+    image: "https://i.pravatar.cc/300?img=23",
+    linkedin: "https://linkedin.com/in/sarahkim",
+    twitter: "https://twitter.com/skim_academic",
+    email: "s.kim@academiapath.com",
+  },
+];
