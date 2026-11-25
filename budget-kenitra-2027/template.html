@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Budgets 2027 – Province de Kénitra</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1c2430;--mut:#667085;--line:#e6e2d8;--a:#0f766e;--b:#c2410c;--c:#1d4ed8;--d:#a16207;--e:#7c3aed;--ok:#15803d;--bad:#b91c1c;--grid:#ece8dd}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10151c;--card:#182029;--ink:#e8edf3;--mut:#93a1b3;--line:#263341;--a:#2dd4bf;--b:#fb923c;--c:#60a5fa;--d:#facc15;--e:#a78bfa;--ok:#4ade80;--bad:#f87171;--grid:#223040}}
+:root[data-theme=dark]{--bg:#10151c;--card:#182029;--ink:#e8edf3;--mut:#93a1b3;--line:#263341;--a:#2dd4bf;--b:#fb923c;--c:#60a5fa;--d:#facc15;--e:#a78bfa;--ok:#4ade80;--bad:#f87171;--grid:#223040}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px 48px}
+header{padding:28px 0 8px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between}
+h1{margin:0;font-size:26px;letter-spacing:-.02em}h1 small{display:block;font-size:13px;font-weight:500;color:var(--mut);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+h2{font-size:18px;margin:36px 0 12px}h2 span{color:var(--mut);font-weight:400;font-size:14px}
+nav{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);padding:4px;border-radius:12px}
+nav button,.btn{border:0;background:none;color:var(--mut);padding:8px 14px;border-radius:9px;font:inherit;cursor:pointer}
+nav button.on{background:var(--ink);color:var(--bg)}
+.grid{display:grid;gap:14px}.k{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}.two{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi .l{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}.kpi .v{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px;font-variant-numeric:tabular-nums}.kpi .s{font-size:12.5px;color:var(--mut)}
+.card h3{margin:0 0 2px;font-size:15px}.card p.d{margin:0 0 10px;color:var(--mut);font-size:13px}
+.ch{position:relative;height:300px}.ch.tall{height:380px}
+.ins{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.ins .card{border-left:4px solid var(--a)}.ins .card:nth-child(2n){border-left-color:var(--b)}.ins .card:nth-child(3n){border-left-color:var(--c)}.ins b{font-size:15px}.ins span{display:block;color:var(--mut);font-size:13px;margin-top:2px}
+select{font:inherit;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+label.t{font-size:13px;color:var(--mut);display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+table{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{cursor:pointer;color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;user-select:none}th:hover{color:var(--ink)}
+.scroll{overflow-x:auto}.bar{height:6px;border-radius:3px;background:var(--grid);overflow:hidden;min-width:70px}.bar i{display:block;height:100%;background:var(--a)}
+.pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;background:var(--grid);color:var(--mut)}
+.hide{display:none}footer{margin-top:40px;color:var(--mut);font-size:12.5px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1><small>Province de Kénitra · Division des collectivités locales</small>Données budgétaires 2027 — tableau de bord</h1>
+  <nav id="tabs"><button data-t="prov" class="on">Vue province</button><button data-t="com">Fiche commune</button><button data-t="tab">Comparatif</button></nav>
+</header>
+
+<section id="prov">
+  <div class="grid k" id="kpiP"></div>
+  <h2>Faits marquants <span>générés automatiquement à partir des fiches</span></h2>
+  <div class="ins" id="insP"></div>
+
+  <h2>Poids budgétaire <span>où se concentre l'argent</span></h2>
+  <div class="grid two">
+    <div class="card" style="grid-column:1/-1"><div class="row" style="justify-content:space-between"><div><h3>Volume budgétaire 2027 par commune</h3><p class="d">Dépenses de fonctionnement + budget d'équipement (MAD millions)</p></div><label class="t"><input type="checkbox" id="noK"> masquer Kénitra pour voir les autres</label></div><div class="ch tall"><canvas id="c1"></canvas></div></div>
+    <div class="card"><h3>D'où vient l'argent ? (province)</h3><p class="d">Structure agrégée des recettes de fonctionnement</p><div class="ch"><canvas id="c2"></canvas></div></div>
+    <div class="card"><h3>Comment est financé l'équipement ?</h3><p class="d">Excédent 2027 + excédent réel 2026 + reports de crédits (M MAD)</p><div class="ch"><canvas id="c5"></canvas></div></div>
+  </div>
+
+  <h2>Dépendance et rigueur de gestion</h2>
+  <div class="grid two">
+    <div class="card"><h3>Autonomie fiscale vs dépendance à la TVA</h3><p class="d">Part des recettes de fonctionnement (100 %)</p><div class="ch tall"><canvas id="c3"></canvas></div></div>
+    <div class="card"><h3>Poids des dépenses de personnel</h3><p class="d">% des dépenses de fonctionnement — la ligne pointillée est la moyenne</p><div class="ch tall"><canvas id="c4"></canvas></div></div>
+    <div class="card" style="grid-column:1/-1"><h3>Carte des communes : autonomie × recouvrement</h3><p class="d">Axe X : autonomie fiscale (%) · Axe Y : reste à recouvrer / recettes de fonctionnement (%) · taille = volume budgétaire. En haut à gauche = fragile.</p><div class="ch tall"><canvas id="c6"></canvas></div></div>
+  </div>
+</section>
+
+<section id="com" class="hide">
+  <div class="row" style="margin:20px 0 14px"><select id="sel"></select><span class="pill" id="rank"></span></div>
+  <div class="grid k" id="kpiC"></div>
+  <h2>Lecture rapide</h2><div class="ins" id="insC"></div>
+  <h2>Détail</h2>
+  <div class="grid two">
+    <div class="card"><h3>Structure des recettes</h3><p class="d">Impôts affectés · taxes locales · TVA</p><div class="ch"><canvas id="d1"></canvas></div></div>
+    <div class="card"><h3>Financement de l'équipement</h3><p class="d">Excédent 2027 · excédent réel 2026 · reports</p><div class="ch"><canvas id="d2"></canvas></div></div>
+    <div class="card"><h3>Principaux postes de dépenses</h3><p class="d">Millions MAD</p><div class="ch tall"><canvas id="d3"></canvas></div></div>
+    <div class="card"><h3>Profil vs moyenne de la province</h3><p class="d">Cinq indicateurs en % — commune contre moyenne des 11 communes</p><div class="ch tall"><canvas id="d4"></canvas></div></div>
+  </div>
+</section>
+
+<section id="tab" class="hide">
+  <h2>Comparatif des 11 communes <span>cliquer sur une colonne pour trier</span></h2>
+  <div class="card scroll"><table id="tbl"></table></div>
+</section>
+
+<footer>Source : fiches de données budgétaires exercice 2027 (Province de Kénitra, Secrétariat général). Montants en dirhams (MAD). Le reste à recouvrer de la commune de Kénitra n'apparaît pas dans la fiche source (« n.d. »).</footer>
+</div>
+<script>/*CHARTJS*/</script>
+<script>
+const RAW=/*DATA*/;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const M=v=>v/1e6, f1=v=>new Intl.NumberFormat('fr-FR',{maximumFractionDigits:1}).format(v);
+const fM=v=>f1(M(v))+' M', pc=v=>f1(v*100)+' %', fMAD=v=>new Intl.NumberFormat('fr-FR',{maximumFractionDigits:0}).format(v);
+const D=RAW.map(c=>{const r=c.rec,e=c.eq,pers=c.dep.find(d=>d[0]==='DEPENSES PERSONNEL')[1];
+ const o={name:c.name,ia:r.ia,tl:r.tl,tva:r.tva,rec:r.total,df:c.dfonct,eq:e.total,vol:c.vol,rar:c.rar,
+  excP:e.excP,excR:e.excR,rep:e.rep,pers,dep:c.dep.filter(d=>!/^(DEPENSES DE FONCTIONNEMENT|TOTAL GLOBAL|EXCEDENT)/.test(d[0]))};
+ o.auto=(o.ia+o.tl)/o.rec;o.tvaS=o.tva/o.rec;o.persS=pers/o.df;o.eqS=o.eq/o.vol;o.epar=o.excP/o.rec;o.repS=o.rep/o.eq;
+ o.rarS=o.rar==null?null:o.rar/o.rec;return o});
+const sum=k=>D.reduce((a,c)=>a+c[k],0), avg=k=>D.reduce((a,c)=>a+c[k],0)/D.length;
+const T={ia:sum('ia'),tl:sum('tl'),tva:sum('tva'),rec:sum('rec'),df:sum('df'),eq:sum('eq'),vol:sum('vol'),excP:sum('excP'),excR:sum('excR'),rep:sum('rep'),pers:sum('pers'),rar:D.reduce((a,c)=>a+(c.rar||0),0)};
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue('--'+n).trim();
+const short=n=>n.replace('Moulay Bousselham','M. Bousselham').replace('Oued El Makhazine','O. El Makhazine').replace('Souk Tlet Gharb','Souk Tlet');
+const kpi=(l,v,s)=>`<div class="card kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;
+const ins=(t,s)=>`<div class="card"><b>${t}</b><span>${s}</span></div>`;
+const best=(k,dir=-1,arr=D)=>[...arr].filter(c=>c[k]!=null).sort((a,b)=>dir*(a[k]-b[k]))[0];
+
+/* ---------- KPIs & insights ---------- */
+$('#kpiP').innerHTML=[
+ kpi('Volume budgétaire',fM(T.vol)+' MAD','11 communes · exercice 2027'),
+ kpi('Recettes fonctionnement',fM(T.rec)+' MAD','dont ressources propres '+pc((T.ia+T.tl)/T.rec)),
+ kpi('Dépenses fonctionnement',fM(T.df)+' MAD','personnel : '+pc(T.pers/T.df)),
+ kpi('Budget équipement',fM(T.eq)+' MAD',pc(T.eq/T.vol)+' du volume total'),
+ kpi('Part de la TVA',pc(T.tva/T.rec),fM(T.tva)+' MAD de recettes'),
+ kpi('Reste à recouvrer',fM(T.rar)+' MAD','au 31/12/2025 (hors Kénitra, n.d.)')].join('');
+const K=D.find(c=>c.name==='Kénitra'),hiT=best('tvaS'),loT=best('tvaS',1),hiP=best('persS'),loP=best('persS',1),hiR=best('rarS'),hiA=best('auto'),hiRep=best('repS');
+const dm=D.filter(c=>c.excP===0).map(c=>c.name);
+$('#insP').innerHTML=[
+ ins(`Kénitra pèse ${pc(K.vol/T.vol)} du volume provincial`,`${fM(K.vol)} MAD sur ${fM(T.vol)} : ${f1(K.vol/ (T.vol-K.vol))} fois les dix autres communes réunies.`),
+ ins(`${hiT.name} : ${pc(hiT.tvaS)} des recettes viennent de la TVA`,`À l'opposé, ${loT.name} n'en dépend qu'à ${pc(loT.tvaS)}. ${D.filter(c=>c.tvaS>.5).length} communes sur 11 dépendent de la TVA à plus de 50 %.`),
+ ins(`Personnel : de ${pc(loP.persS)} (${loP.name}) à ${pc(hiP.persS)} (${hiP.name})`,`Moyenne communale ${pc(avg('persS'))}. ${D.filter(c=>c.persS>.6).length} communes consacrent plus de 60 % du fonctionnement à la masse salariale.`),
+ ins(`${hiR.name} : reste à recouvrer = ${pc(hiR.rarS)} de ses recettes`,`${fM(hiR.rar)} MAD à récupérer — le niveau le plus élevé rapporté au budget de fonctionnement.`),
+ ins(`${pc(T.rep/T.eq)} de l'équipement vient de reports de crédits`,`${fM(T.rep)} MAD de crédits 2026 reportés : le rythme d'exécution des projets conditionne 2027.`),
+ ins(`${dm.length} communes sans excédent prévisionnel`,dm.join(', ')+' : budget de fonctionnement équilibré à zéro marge.')].join('');
+
+/* ---------- chart helpers ---------- */
+let charts={};const mk=(id,cfg)=>{charts[id]&&charts[id].destroy();charts[id]=new Chart($('#'+id),cfg)};
+const PAL=()=>[css('a'),css('b'),css('c'),css('d'),css('e')];
+function base(extra={}){Chart.defaults.color=css('mut');Chart.defaults.font.family='system-ui,-apple-system,Segoe UI,Roboto,sans-serif';
+ return Object.assign({responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,usePointStyle:true}}}},extra)}
+const gridc=()=>({color:css('grid')});
+const tipM=c=>`${c.dataset.label||c.label}: ${f1(c.parsed.x??c.parsed.y??c.parsed)} M`;
+
+function drawProv(){
+ const noK=$('#noK').checked;let L=[...D].sort((a,b)=>b.vol-a.vol);if(noK)L=L.filter(c=>c!==K);
+ mk('c1',{type:'bar',data:{labels:L.map(c=>short(c.name)),datasets:[{label:'Fonctionnement',data:L.map(c=>M(c.df)),backgroundColor:css('a'),borderRadius:4},{label:'Équipement',data:L.map(c=>M(c.eq)),backgroundColor:css('b'),borderRadius:4}]},
+  options:base({indexAxis:'y',scales:{x:{stacked:true,grid:gridc(),title:{display:true,text:'M MAD'}},y:{stacked:true,grid:{display:false}}},plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:tipM}}}})});
+ mk('c2',{type:'doughnut',data:{labels:['Impôts affectés','Taxes locales','TVA'],datasets:[{data:[T.ia,T.tl,T.tva].map(M),backgroundColor:[css('a'),css('c'),css('d')],borderColor:css('card'),borderWidth:3}]},
+  options:base({cutout:'62%',plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>`${c.label}: ${f1(c.parsed)} M (${f1(c.parsed/M(T.rec)*100)} %)`}}}})});
+ const S=[...D].sort((a,b)=>b.auto-a.auto);
+ mk('c3',{type:'bar',data:{labels:S.map(c=>short(c.name)),datasets:[
+  {label:'Impôts affectés',data:S.map(c=>c.ia/c.rec*100),backgroundColor:css('a')},{label:'Taxes locales',data:S.map(c=>c.tl/c.rec*100),backgroundColor:css('c')},{label:'TVA',data:S.map(c=>c.tvaS*100),backgroundColor:css('d')}]},
+  options:base({indexAxis:'y',scales:{x:{stacked:true,max:100,grid:gridc(),ticks:{callback:v=>v+' %'}},y:{stacked:true,grid:{display:false}}},plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${f1(c.parsed.x)} %`}}}})});
+ const P=[...D].sort((a,b)=>b.persS-a.persS),av=avg('persS')*100;
+ mk('c4',{type:'bar',data:{labels:P.map(c=>short(c.name)),datasets:[{label:'Personnel / dépenses fonct.',data:P.map(c=>c.persS*100),backgroundColor:P.map(c=>c.persS*100>av?css('b'):css('a')),borderRadius:4}]},
+  options:base({indexAxis:'y',scales:{x:{grid:gridc(),ticks:{callback:v=>v+' %'}},y:{grid:{display:false}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>f1(c.parsed.x)+' %'}},
+   annotation:false}}),plugins:[{id:'avg',afterDatasetsDraw(ch){const x=ch.scales.x.getPixelForValue(av),a=ch.chartArea,g=ch.ctx;g.save();g.setLineDash([5,4]);g.strokeStyle=css('ink');g.beginPath();g.moveTo(x,a.top);g.lineTo(x,a.bottom);g.stroke();g.fillStyle=css('ink');g.font='11px system-ui';g.fillText('moy. '+f1(av)+' %',x+4,a.top+10);g.restore()}}]});
+ mk('c5',{type:'bar',data:{labels:[...D].sort((a,b)=>b.eq-a.eq).map(c=>short(c.name)),datasets:[['Excédent prév. 2027','excP','a'],['Excédent réel 2026','excR','c'],['Report de crédits 2026','rep','b']].map(([l,k,col])=>({label:l,data:[...D].sort((a,b)=>b.eq-a.eq).map(c=>M(c[k])),backgroundColor:css(col)}))},
+  options:base({scales:{x:{stacked:true,grid:{display:false},ticks:{maxRotation:55,minRotation:55}},y:{stacked:true,grid:gridc(),title:{display:true,text:'M MAD'}}},plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${f1(c.parsed.y)} M`}}}})});
+ const B=D.filter(c=>c.rarS!=null);
+ mk('c6',{type:'bubble',data:{datasets:B.map((c,i)=>({label:c.name,data:[{x:c.auto*100,y:c.rarS*100,r:6+Math.sqrt(c.vol/1e6)*1.6,name:c.name,c}],backgroundColor:PAL()[i%5]+'b3',borderColor:PAL()[i%5],borderWidth:1.5}))},
+  options:base({scales:{x:{min:0,max:100,grid:gridc(),title:{display:true,text:'Autonomie fiscale (%)'}},y:{beginAtZero:true,grid:gridc(),title:{display:true,text:'Reste à recouvrer / recettes (%)'}}},
+   plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const d=c.raw.c;return [d.name,'Autonomie '+pc(d.auto),'Reste à recouvrer '+pc(d.rarS)+' des recettes','Volume '+fM(d.vol)+' MAD']}}}}}),
+  plugins:[{id:'lbl',afterDatasetsDraw(ch){const g=ch.ctx;g.save();g.fillStyle=css('ink');g.font='11px system-ui';g.textAlign='center';ch.data.datasets.forEach((ds,i)=>{const p=ch.getDatasetMeta(i).data[0];g.fillText(short(ds.label),p.x,p.y-p.options.radius-4)});g.restore()}}]});
+}
+$('#noK').onchange=drawProv;
+
+/* ---------- commune ---------- */
+$('#sel').innerHTML=[...D].sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(c=>`<option>${c.name}</option>`).join('');
+$('#sel').value='Kénitra';
+const rk=(c,k,dir=-1)=>[...D].filter(x=>x[k]!=null).sort((a,b)=>dir*(a[k]-b[k])).findIndex(x=>x===c)+1;
+function drawCom(){
+ const c=D.find(x=>x.name===$('#sel').value);
+ $('#rank').textContent=`${rk(c,'vol')}ᵉ budget de la province sur 11`;
+ $('#kpiC').innerHTML=[kpi('Volume budgétaire',fM(c.vol)+' MAD',pc(c.vol/T.vol)+' de la province'),kpi('Recettes fonct.',fM(c.rec)+' MAD','autonomie fiscale '+pc(c.auto)),
+  kpi('Dépenses fonct.',fM(c.df)+' MAD','personnel '+pc(c.persS)),kpi('Équipement',fM(c.eq)+' MAD',pc(c.eqS)+' du volume'),
+  kpi('Excédent prév. 2027',fM(c.excP)+' MAD',c.excP?pc(c.epar)+' des recettes':'aucune marge'),kpi('Reste à recouvrer',c.rar==null?'n.d.':fM(c.rar)+' MAD',c.rar==null?'non renseigné dans la fiche':pc(c.rarS)+' des recettes')].join('');
+ const tb=c.dep.filter(d=>d[0]!=='DEPENSES PERSONNEL'&&d[0]!=='AUTRES DEPENSES').sort((a,b)=>b[1]-a[1])[0];
+ const cmp=(v,m,hi,lo)=>v>m*1.1?hi:v<m*.9?lo:'proche de la moyenne';
+ $('#insC').innerHTML=[
+  ins(`Recettes : ${pc(c.tvaS)} de TVA`,`${c.tvaS>avg('tvaS')*1.1?'Dépendance supérieure':c.tvaS<avg('tvaS')*.9?'Dépendance inférieure':'Dépendance proche'} à la moyenne communale (${pc(avg('tvaS'))}) · rang ${rk(c,'tvaS')}/11.`),
+  ins(`Personnel : ${pc(c.persS)} du fonctionnement`,`Moyenne communale ${pc(avg('persS'))} · ${c.persS>avg('persS')?'masse salariale plus lourde':'masse salariale plus légère'} que la moyenne.`),
+  ins(`Poste principal hors personnel`,`${tb[0].toLowerCase().replace(/^./,m=>m.toUpperCase())} — ${fM(tb[1])} MAD (${pc(tb[1]/c.df)} du fonctionnement).`),
+  ins(`Équipement : ${pc(c.repS)} en reports de crédits`,`${fM(c.rep)} MAD reportés de 2026 sur ${fM(c.eq)} MAD de budget d'équipement.`)].join('');
+ mk('d1',{type:'doughnut',data:{labels:['Impôts affectés','Taxes locales','TVA'],datasets:[{data:[c.ia,c.tl,c.tva].map(M),backgroundColor:[css('a'),css('c'),css('d')],borderColor:css('card'),borderWidth:3}]},options:base({cutout:'62%',plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:x=>`${x.label}: ${f1(x.parsed)} M (${f1(x.parsed/M(c.rec)*100)} %)`}}}})});
+ mk('d2',{type:'doughnut',data:{labels:['Excédent prév. 2027','Excédent réel 2026','Report de crédits'],datasets:[{data:[c.excP,c.excR,c.rep].map(M),backgroundColor:[css('a'),css('c'),css('b')],borderColor:css('card'),borderWidth:3}]},options:base({cutout:'62%',plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:x=>`${x.label}: ${f1(x.parsed)} M`}}}})});
+ const dd=[...c.dep].sort((a,b)=>b[1]-a[1]).slice(0,9);const lab=s=>{s=s.toLowerCase().replace(/^./,m=>m.toUpperCase());return s.length>30?s.slice(0,28)+'…':s};
+ mk('d3',{type:'bar',data:{labels:dd.map(d=>lab(d[0])),datasets:[{data:dd.map(d=>M(d[1])),backgroundColor:dd.map((d,i)=>d[0]==='DEPENSES PERSONNEL'?css('b'):css('a')),borderRadius:4}]},options:base({indexAxis:'y',scales:{x:{grid:gridc()},y:{grid:{display:false}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>f1(x.parsed.x)+' M'}}}})});
+ const ax=[['Autonomie fiscale','auto'],['Dépend. TVA','tvaS'],['Personnel','persS'],['Équipement / volume','eqS'],['Report / équipement','repS']];
+ mk('d4',{type:'radar',data:{labels:ax.map(a=>a[0]),datasets:[{label:c.name,data:ax.map(a=>c[a[1]]*100),borderColor:css('b'),backgroundColor:css('b')+'40',pointBackgroundColor:css('b')},{label:'Moyenne province',data:ax.map(a=>avg(a[1])*100),borderColor:css('c'),backgroundColor:css('c')+'25',pointBackgroundColor:css('c'),borderDash:[5,4]}]},
+  options:base({scales:{r:{min:0,max:100,grid:gridc(),angleLines:gridc(),ticks:{display:false}}},plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:x=>`${x.dataset.label}: ${f1(x.parsed.r)} %`}}}})});
+}
+$('#sel').onchange=drawCom;
+
+/* ---------- table ---------- */
+const cols=[['Commune','name',v=>v],['Volume (M)','vol',v=>f1(M(v))],['Recettes fonct. (M)','rec',v=>f1(M(v))],['Équipement (M)','eq',v=>f1(M(v))],['Autonomie','auto',pc],['TVA','tvaS',pc],['Personnel','persS',pc],['Report/équip.','repS',pc],['Reste à recouvrer (M)','rar',v=>v==null?'n.d.':f1(M(v))]];
+let sk='vol',sd=-1;
+function drawTbl(){const rows=[...D].sort((a,b)=>typeof a[sk]==='string'?sd*a[sk].localeCompare(b[sk],'fr'):sd*((a[sk]??-1)-(b[sk]??-1)));const mx=Math.max(...D.map(c=>c.vol));
+ $('#tbl').innerHTML='<thead><tr>'+cols.map(c=>`<th data-k="${c[1]}">${c[0]}${c[1]===sk?(sd<0?' ▼':' ▲'):''}</th>`).join('')+'<th>Poids</th></tr></thead><tbody>'+rows.map(r=>'<tr>'+cols.map(c=>`<td>${c[2](r[c[1]])}</td>`).join('')+`<td><div class="bar"><i style="width:${r.vol/mx*100}%"></i></div></td></tr>`).join('')+
+ `</tbody><tfoot><tr style="font-weight:700"><td>Province</td><td>${f1(M(T.vol))}</td><td>${f1(M(T.rec))}</td><td>${f1(M(T.eq))}</td><td>${pc((T.ia+T.tl)/T.rec)}</td><td>${pc(T.tva/T.rec)}</td><td>${pc(T.pers/T.df)}</td><td>${pc(T.rep/T.eq)}</td><td>${f1(M(T.rar))}</td><td></td></tr></tfoot>`;
+ $$('#tbl th[data-k]').forEach(th=>th.onclick=()=>{sd=sk===th.dataset.k?-sd:-1;sk=th.dataset.k;drawTbl()})}
+
+/* ---------- tabs / theme ---------- */
+$$('#tabs button').forEach(b=>b.onclick=()=>{$$('#tabs button').forEach(x=>x.classList.toggle('on',x===b));['prov','com','tab'].forEach(s=>$('#'+s).classList.toggle('hide',s!==b.dataset.t));
+ if(b.dataset.t==='com')drawCom();window.dispatchEvent(new Event('resize'))});
+const all=()=>{drawProv();if(!$('#com').classList.contains('hide'))drawCom()};
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);
+drawProv();drawTbl();
+</script>
+</body>
+</html>
